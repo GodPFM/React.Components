@@ -1,0 +1,20 @@
+.searchInput {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 55px;
+  padding: 10px 15px;
+
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0.105em;
+
+  color: #8A8686;
+}
+
+.searchInput__container {
+  width: 400px;
+  margin: 0 auto;
+}

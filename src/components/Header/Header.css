@@ -12,9 +12,13 @@
   max-width: 1200px;
 }
 
-.header__link {
-  margin-right: 10px;
+.header__nav {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+}
 
+.header__link {
   font-family: 'Poppins-med', sans-serif;
   font-style: normal;
   font-weight: 500;

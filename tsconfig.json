@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["dom", "esnext", "dom.iterable"],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
