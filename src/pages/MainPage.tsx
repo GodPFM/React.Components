@@ -6,9 +6,11 @@ import { IApiResponse } from '../types/APIResponse';
 import ProductsServes from '../API/ProductsServes';
 import ProductItem from '../components/UI/productItem/ProductItem';
 import Button from '../components/UI/button/Button';
+import Loader from '../components/UI/loading/Loader';
 
 interface IState {
   isLoading: boolean;
+  isCardsLoading: boolean;
   products: IApiResponse[];
   page: number;
 }
@@ -22,6 +24,7 @@ class MainPage extends Component<IProps, IState> {
     super(props);
     this.state = {
       isLoading: true,
+      isCardsLoading: true,
       products: [],
       page: 0,
     };
@@ -33,6 +36,8 @@ class MainPage extends Component<IProps, IState> {
     if (items) {
       if (items.data) {
         this.setState({
+          ...this.state,
+          isCardsLoading: false,
           isLoading: false,
           products: items.data,
         });
@@ -45,11 +50,13 @@ class MainPage extends Component<IProps, IState> {
   }
 
   async getMoreCards() {
+    this.setState({ ...this.state, isCardsLoading: true });
     const items = await this.getItems(this.state.page + 12);
     this.setState({
       ...this.state,
       page: this.state.page + 12,
       products: [...this.state.products, ...items.data],
+      isCardsLoading: false,
     });
   }
 
@@ -57,13 +64,14 @@ class MainPage extends Component<IProps, IState> {
     return (
       <div className="mainPage">
         <SeachInput />
-        {this.state.isLoading && <h2>Загрузка</h2>}
+        {this.state.isLoading && <Loader />}
         <div className="items__container">
           {this.state.products.map((item) => (
             <ProductItem product={item} key={item.id} />
           ))}
+          {this.state.isCardsLoading && <Loader />}
         </div>
-        {this.state.page < 188 && (
+        {this.state.page < 188 && !this.state.isCardsLoading && (
           <Button text={'Download more'} onClck={() => this.getMoreCards()}></Button>
         )}
       </div>
