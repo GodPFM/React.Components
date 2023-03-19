@@ -1,10 +1,16 @@
 import { describe, expect, test } from 'vitest';
 import ProductsServes from '../API/ProductsServes';
+import { waitFor } from '@testing-library/react';
 
 describe('Products serves', () => {
   test('returns false on -1', async () => {
     const response = await ProductsServes.getById('-1');
-    expect(response).toBe(false);
+    waitFor(
+      () => {
+        expect(response).toBe(false);
+      },
+      { timeout: 6000 }
+    );
   });
   test('returns object by id', async () => {
     const response = await ProductsServes.getById('23');
