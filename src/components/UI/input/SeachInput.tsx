@@ -18,7 +18,6 @@ class SeachInput extends Component<IProps, IState> {
   }
 
   handleChange(event: React.FormEvent<HTMLInputElement>) {
-    console.log(this.state);
     this.setState({ inputValue: event.currentTarget.value });
   }
 

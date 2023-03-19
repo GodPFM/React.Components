@@ -10,7 +10,6 @@ describe('Products page', () => {
         return { pathname: '/products/23' };
       },
     });
-    console.log(window.location);
     render(<ProductPage />);
     await waitFor(
       () => {
