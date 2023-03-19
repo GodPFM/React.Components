@@ -1,0 +1,26 @@
+.button__container {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  margin-top: 20px;
+  width: 206px;
+  height: 66px;
+  border: none;
+  cursor: pointer;
+
+  background: #FF9643;
+  border-radius: 32px;
+
+  font-family: 'Poppins-med';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 36px;
+  /* identical to box height */
+
+  letter-spacing: 0.05em;
+
+  color: #FFFFFF;
+}

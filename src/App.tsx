@@ -15,6 +15,7 @@ function App() {
           <Route path="/about" element={<About />}></Route>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/page404" element={<Page404 />}></Route>
+          <Route path="/product/:id" element={<About />} />
           <Route path="*" element={<Navigate to="/page404" replace />}></Route>
         </Routes>
       </BrowserRouter>

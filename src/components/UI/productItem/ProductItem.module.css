@@ -1,0 +1,39 @@
+.item {
+  width: 23%;
+  text-decoration: none;
+  background: white;
+  color: black;
+  border: 1px solid lightgray;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  transform: scale(1);
+  transition: transform 0.2s ease-in;
+  position: relative;
+}
+
+.item:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in;
+  z-index: 10;
+}
+
+.item__image {
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.item__title {
+  white-space: nowrap;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item__description {
+  height: 120px;
+  max-height: 120px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
