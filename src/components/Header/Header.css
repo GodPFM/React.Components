@@ -1,0 +1,32 @@
+.header {
+  background: white;
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+}
+
+.header__link {
+  margin-right: 10px;
+
+  font-family: 'Poppins-med', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  color: #0D095C;
+  transition: color 0.2s ease-in;
+}
+
+.header__link:hover {
+  color: #FF9643;
+  transition: color 0.2s ease-in;
+}

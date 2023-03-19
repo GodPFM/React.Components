@@ -1,13 +1,20 @@
 import React from 'react';
-import classes from './Header.module.css';
-import PropTypes from 'prop-types';
+import './Header.css';
+import { Link } from 'react-router-dom';
 
-const Header = (props) => {
+const Header = () => {
   return (
-    <header className={classes.header}>
-      <nav>
-        <a href=""></a>
-      </nav>
+    <header className="header">
+      <div className="header__wrapper">
+        <nav className="header__nav">
+          <Link className="header__link" to="/">
+            Main page
+          </Link>
+          <Link className="header__link" to="/about">
+            About us
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 };
