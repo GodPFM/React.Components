@@ -5,6 +5,7 @@ import About from './pages/About';
 import MainPage from './pages/MainPage';
 import Page404 from './pages/Page404';
 import Header from './components/Header/Header';
+import ProductPage from './pages/ProductPage';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Route path="/about" element={<About />}></Route>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/page404" element={<Page404 />}></Route>
-          <Route path="/product/:id" element={<About />} />
+          <Route path="/product/:id" element={<ProductPage />} />
           <Route path="*" element={<Navigate to="/page404" replace />}></Route>
         </Routes>
       </BrowserRouter>
