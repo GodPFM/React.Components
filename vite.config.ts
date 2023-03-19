@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      input: resolve(__dirname, './src/main.ts'),
+      input: resolve(__dirname, './src/main.tsx'),
     },
   },
 });
