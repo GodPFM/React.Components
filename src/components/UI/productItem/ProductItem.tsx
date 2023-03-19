@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { IApiResponse } from '../../../types/APIResponse';
 import classes from './ProductItem.module.css';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface IState {
   test?: string;

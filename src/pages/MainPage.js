@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
 import '../styles/MainPage.css';
 import SeachInput from '../components/UI/input/SeachInput';
-import { IApiResponse } from '../types/APIResponse';
 import ProductsServes from '../API/ProductsServes';
 import ProductItem from '../components/UI/productItem/ProductItem';
 import Button from '../components/UI/button/Button';
 import Loader from '../components/UI/loading/Loader';
-
-interface IState {
-  isLoading: boolean;
-  isCardsLoading: boolean;
-  products: IApiResponse[];
-  page: number;
-}
-
-interface IProps {
-  test?: string;
-}
-
-class MainPage extends Component<IProps, IState> {
-  constructor(props: object) {
+class MainPage extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
@@ -29,7 +16,6 @@ class MainPage extends Component<IProps, IState> {
     };
     this.getMoreCards = this.getMoreCards.bind(this);
   }
-
   async componentDidMount() {
     const items = await this.getItems(this.state.page);
     if (items) {
@@ -43,11 +29,9 @@ class MainPage extends Component<IProps, IState> {
       }
     }
   }
-
-  async getItems(page: number) {
-    return await ProductsServes.getAll(12, page);
+  async getItems(page) {
+    return await ProductsServes.getAll('12', page);
   }
-
   async getMoreCards() {
     this.setState({ ...this.state, isCardsLoading: true });
     const items = await this.getItems(this.state.page + 12);
@@ -58,24 +42,24 @@ class MainPage extends Component<IProps, IState> {
       isCardsLoading: false,
     });
   }
-
   render() {
-    return (
-      <div className="mainPage">
-        <SeachInput />
-        {this.state.isLoading && <Loader />}
-        <div className="items__container">
-          {this.state.products.map((item) => (
-            <ProductItem product={item} key={item.id} />
-          ))}
-          {this.state.isCardsLoading && <Loader />}
-        </div>
-        {this.state.page < 188 && !this.state.isCardsLoading && (
-          <Button text={'Download more'} onClck={() => this.getMoreCards()}></Button>
-        )}
-      </div>
+    return React.createElement(
+      'div',
+      { className: 'mainPage' },
+      React.createElement(SeachInput, null),
+      this.state.isLoading && React.createElement(Loader, null),
+      React.createElement(
+        'div',
+        { className: 'items__container' },
+        this.state.products.map((item) =>
+          React.createElement(ProductItem, { product: item, key: item.id })
+        ),
+        this.state.isCardsLoading && React.createElement(Loader, null)
+      ),
+      this.state.page < 188 &&
+        !this.state.isCardsLoading &&
+        React.createElement(Button, { text: 'Download more', onClck: () => this.getMoreCards() })
     );
   }
 }
-
 export default MainPage;

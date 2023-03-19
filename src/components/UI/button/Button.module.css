@@ -11,7 +11,7 @@
   border: none;
   cursor: pointer;
 
-  background: #FF9643;
+  background: #ff9643;
   border-radius: 32px;
 
   font-family: 'Poppins', sans-serif;
@@ -23,5 +23,5 @@
 
   letter-spacing: 0.05em;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
