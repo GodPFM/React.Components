@@ -8,7 +8,6 @@ export default class ProductsServes {
         limit: limit,
       },
     });
-    console.log(response);
     return response;
   }
 

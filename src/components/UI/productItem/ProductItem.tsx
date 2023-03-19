@@ -21,7 +21,11 @@ class ProductItem extends Component<IProps, IState> {
   render() {
     return (
       <Link to={'/product/' + this.props.product.id} className={classes.item}>
-        <img className={classes.item__image} src={this.props.product.images?.[0]} alt="" />
+        <img
+          className={classes.item__image}
+          src={this.props.product.images?.[0]}
+          alt="Product image"
+        />
         <h2 className={classes.item__title}>{this.props.product.title}</h2>
         <p className={classes.item__description}>{this.props.product.description}</p>
         <p>{this.props.product.price}$</p>

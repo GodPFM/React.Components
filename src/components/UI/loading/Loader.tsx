@@ -6,7 +6,7 @@ class Loader extends Component {
   render() {
     return (
       <div className={classes.loader__container}>
-        <img className={classes.loader} src={LoaderSvg as unknown as string} alt="" />
+        <img className={classes.loader} src={LoaderSvg as unknown as string} alt="Loader svg" />
       </div>
     );
   }
