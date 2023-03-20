@@ -34,3 +34,7 @@
   color: #ff9643;
   transition: color 0.2s ease-in;
 }
+
+.header__link.active {
+  color: #ff9643;
+}
