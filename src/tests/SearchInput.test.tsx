@@ -1,11 +1,11 @@
 import React from 'react';
 import { describe, expect, test } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import SeachInput from '../components/UI/input/SeachInput';
+import Input from '../components/UI/input/Input';
 
 describe('Search input', () => {
   test('Should display entered values', async () => {
-    render(<SeachInput />);
+    render(<Input />);
     const element = screen.getByDisplayValue('');
     fireEvent.input(element, {
       target: {

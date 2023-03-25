@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../UI/button/Button';
-import SeachInput from '../UI/input/SeachInput';
+import Input from '../UI/input/Input';
 
 class SearchField extends Component {
   render() {
@@ -10,7 +10,7 @@ class SearchField extends Component {
         <Link className="search__create-link" to={'add-item'}>
           <Button text={'Create card'} />
         </Link>
-        <SeachInput placeholder={'Search'} />
+        <Input placeholder={'Search'} />
       </div>
     );
   }

@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import classes from './SeachInput.module.css';
+import classes from './Input.module.css';
 
 interface IProps {
   name?: string;
   placeholder: string;
   labelForInput?: string;
+  type?: string;
 }
 interface IState {
   inputValue: string;
 }
 
-class SeachInput extends Component<IProps, IState> {
+class Input extends Component<IProps, IState> {
+  private type: string;
   constructor(props: IProps) {
     super(props);
+    this.type = this.props.type ? this.props.type : 'text';
     this.state = {
       inputValue: '',
     };
@@ -47,16 +50,20 @@ class SeachInput extends Component<IProps, IState> {
   render() {
     return (
       <div className={classes.searchInput__container}>
-        {this.props.labelForInput && <label>${this.props.labelForInput}</label>}
+        {this.props.labelForInput && (
+          <label htmlFor={this.props.name}>{this.props.labelForInput}</label>
+        )}
         <input
           className={classes.searchInput}
           value={this.state.inputValue}
           onInput={this.handleChange}
           placeholder={this.props.placeholder}
-          type="text"
+          name={this.props.name}
+          id={this.props.name}
+          type={this.type}
         />
       </div>
     );
   }
 }
-export default SeachInput;
+export default Input;
