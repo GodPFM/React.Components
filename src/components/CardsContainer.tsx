@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ProductItem from './UI/productItem/ProductItem';
-import Loader from './UI/loading/Loader';
 import { IApiResponse } from '../types/APIResponse';
 
 interface IProps {

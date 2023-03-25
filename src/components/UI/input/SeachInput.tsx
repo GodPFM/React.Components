@@ -3,13 +3,15 @@ import classes from './SeachInput.module.css';
 
 interface IProps {
   name?: string;
+  placeholder: string;
+  labelForInput?: string;
 }
 interface IState {
   inputValue: string;
 }
 
 class SeachInput extends Component<IProps, IState> {
-  constructor(props: object) {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       inputValue: '',
@@ -45,11 +47,12 @@ class SeachInput extends Component<IProps, IState> {
   render() {
     return (
       <div className={classes.searchInput__container}>
+        {this.props.labelForInput && <label>${this.props.labelForInput}</label>}
         <input
           className={classes.searchInput}
           value={this.state.inputValue}
           onInput={this.handleChange}
-          placeholder="Search"
+          placeholder={this.props.placeholder}
           type="text"
         />
       </div>

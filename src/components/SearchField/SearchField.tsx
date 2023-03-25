@@ -10,7 +10,7 @@ class SearchField extends Component {
         <Link className="search__create-link" to={'add-item'}>
           <Button text={'Create card'} />
         </Link>
-        <SeachInput />
+        <SeachInput placeholder={'Search'} />
       </div>
     );
   }
