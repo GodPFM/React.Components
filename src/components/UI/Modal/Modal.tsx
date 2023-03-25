@@ -15,11 +15,17 @@ class Modal extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
   }
+
+  handleClick(e: React.MouseEvent) {
+    e.stopPropagation();
+  }
   render() {
     return (
-      <Link className={classes.modal} to={'/'} onClick={this.props.closeModal}>
-        <div className={classes.modal__container}>{this.props.children}</div>
-      </Link>
+      <div className={classes.modal} onClick={this.props.closeModal}>
+        <div className={classes.modal__container} onClick={this.handleClick}>
+          {this.props.children}
+        </div>
+      </div>
     );
   }
 }

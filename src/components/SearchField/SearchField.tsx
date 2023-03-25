@@ -11,10 +11,10 @@ class SearchField extends Component<IProps> {
   render() {
     return (
       <div className="search__container">
-        <Link className="search__create-link" to={'add-item'}>
-          <Button text={'Create card'} onClck={this.props.openModal} />
+        <Link className="search__create-link" to={'add-item'} onClick={this.props.openModal}>
+          <Button text={'Create card'} />
         </Link>
-        <Input placeholder={'Search'} />
+        <Input name={'search'} placeholder={'Search'} />
       </div>
     );
   }

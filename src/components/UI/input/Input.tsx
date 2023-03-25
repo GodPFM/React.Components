@@ -27,7 +27,7 @@ class Input extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    const value = localStorage.getItem('searchInput');
+    const value = localStorage.getItem(`${this.props.name}Input`);
     if (value) {
       this.setState({ inputValue: value });
     } else {
@@ -38,13 +38,13 @@ class Input extends Component<IProps, IState> {
 
   handleWindowBeforeUnload = () => {
     const value = this.state.inputValue;
-    localStorage.setItem('searchInput', value);
+    localStorage.setItem(`${this.props.name}Input`, value);
   };
 
   componentWillUnmount() {
     const value = this.state.inputValue;
     window.removeEventListener('beforeunload', this.handleWindowBeforeUnload);
-    localStorage.setItem('searchInput', value);
+    localStorage.setItem(`${this.props.name}Input`, value);
   }
 
   render() {

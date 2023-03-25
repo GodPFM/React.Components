@@ -29,7 +29,7 @@ class MainPage extends Component<IProps, IState> {
       isCardsLoading: true,
       products: [],
       page: 0,
-      isModalOpen: this.props.isOpenCreateCards ? true : false,
+      isModalOpen: !!this.props.isOpenCreateCards,
     };
     this.getMoreCards = this.getMoreCards.bind(this);
     this.openModal = this.openModal.bind(this);
@@ -37,11 +37,15 @@ class MainPage extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
+    window.onpopstate = (e) => {
+      if (location.pathname === '/') {
+        this.setState({ isModalOpen: false });
+      }
+    };
     const items = await this.getItems(this.state.page);
     if (items) {
       if (items.data) {
         this.setState({
-          ...this.state,
           isCardsLoading: false,
           isLoading: false,
           products: items.data,
@@ -55,10 +59,9 @@ class MainPage extends Component<IProps, IState> {
   }
 
   async getMoreCards() {
-    this.setState({ ...this.state, isLoading: true });
+    this.setState({ isLoading: true });
     const items = await this.getItems(this.state.page + 12);
     this.setState({
-      ...this.state,
       page: this.state.page + 12,
       products: [...this.state.products, ...items.data],
       isLoading: false,
@@ -66,11 +69,12 @@ class MainPage extends Component<IProps, IState> {
   }
 
   openModal() {
-    this.setState({ ...this.state, isModalOpen: true });
+    this.setState({ isModalOpen: true });
   }
 
   closeModal() {
-    this.setState({ ...this.state, isModalOpen: false });
+    this.setState({ isModalOpen: false });
+    history.go(-1);
   }
 
   render() {
