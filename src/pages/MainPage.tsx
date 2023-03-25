@@ -6,16 +6,19 @@ import Button from '../components/UI/button/Button';
 import Loader from '../components/UI/loading/Loader';
 import SearchField from '../components/SearchField/SearchField';
 import CardsContainer from '../components/CardsContainer';
+import Modal from '../components/UI/Modal/Modal';
+import AddCardForm from './AddCardForm';
 
 interface IState {
   isLoading: boolean;
   isCardsLoading: boolean;
   products: IApiResponse[];
   page: number;
+  isModalOpen: boolean;
 }
 
 interface IProps {
-  test?: string;
+  isOpenCreateCards?: boolean;
 }
 
 class MainPage extends Component<IProps, IState> {
@@ -26,8 +29,11 @@ class MainPage extends Component<IProps, IState> {
       isCardsLoading: true,
       products: [],
       page: 0,
+      isModalOpen: this.props.isOpenCreateCards ? true : false,
     };
     this.getMoreCards = this.getMoreCards.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   async componentDidMount() {
@@ -49,25 +55,37 @@ class MainPage extends Component<IProps, IState> {
   }
 
   async getMoreCards() {
-    this.setState({ ...this.state, isCardsLoading: true });
+    this.setState({ ...this.state, isLoading: true });
     const items = await this.getItems(this.state.page + 12);
     this.setState({
       ...this.state,
       page: this.state.page + 12,
       products: [...this.state.products, ...items.data],
-      isCardsLoading: false,
+      isLoading: false,
     });
+  }
+
+  openModal() {
+    this.setState({ ...this.state, isModalOpen: true });
+  }
+
+  closeModal() {
+    this.setState({ ...this.state, isModalOpen: false });
   }
 
   render() {
     return (
       <div className="mainPage">
-        <SearchField />
-        {this.state.isLoading && <Loader />}
+        <SearchField openModal={this.openModal} />
         <CardsContainer products={this.state.products} isCardsLoading={this.state.isLoading} />
-        {this.state.isCardsLoading && <Loader />}
+        {this.state.isLoading && <Loader />}
         {this.state.page < 188 && !this.state.isCardsLoading && (
           <Button text={'Download more'} onClck={() => this.getMoreCards()}></Button>
+        )}
+        {this.state.isModalOpen && (
+          <Modal closeModal={this.closeModal}>
+            <AddCardForm />
+          </Modal>
         )}
       </div>
     );
