@@ -7,7 +7,7 @@ interface IState {
 
 interface IProps {
   text: string;
-  onClck: () => void;
+  onClck?: () => void;
 }
 
 class Button extends Component<IProps, IState> {

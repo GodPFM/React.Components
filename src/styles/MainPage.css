@@ -10,3 +10,7 @@
   justify-content: space-between;
   font-family: 'Poppins', sans-serif;
 }
+
+.search__create-link {
+  text-decoration: none;
+}

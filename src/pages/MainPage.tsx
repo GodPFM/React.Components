@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import '../styles/MainPage.css';
-import SeachInput from '../components/UI/input/SeachInput';
 import { IApiResponse } from '../types/APIResponse';
 import ProductsServes from '../API/ProductsServes';
-import ProductItem from '../components/UI/productItem/ProductItem';
 import Button from '../components/UI/button/Button';
 import Loader from '../components/UI/loading/Loader';
+import SearchField from '../components/SearchField/SearchField';
+import CardsContainer from '../components/CardsContainer';
 
 interface IState {
   isLoading: boolean;
@@ -62,14 +62,10 @@ class MainPage extends Component<IProps, IState> {
   render() {
     return (
       <div className="mainPage">
-        <SeachInput />
+        <SearchField />
         {this.state.isLoading && <Loader />}
-        <div className="items__container">
-          {this.state.products.map((item) => (
-            <ProductItem product={item} key={item.id} />
-          ))}
-          {this.state.isCardsLoading && <Loader />}
-        </div>
+        <CardsContainer products={this.state.products} isCardsLoading={this.state.isLoading} />
+        {this.state.isCardsLoading && <Loader />}
         {this.state.page < 188 && !this.state.isCardsLoading && (
           <Button text={'Download more'} onClck={() => this.getMoreCards()}></Button>
         )}
