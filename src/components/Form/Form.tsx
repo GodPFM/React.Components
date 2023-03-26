@@ -41,9 +41,11 @@ class Form extends Component<IProps, CardFormCheck> {
     };
   }
 
-  getImage(file: FileList) {
-    const image = URL.createObjectURL(file[0]);
-    this.setState({ image: image });
+  getImage(file: FileList | null | undefined) {
+    if (file) {
+      const image = URL.createObjectURL(file[0]);
+      this.setState({ image: image });
+    }
   }
 
   closeModal() {
@@ -86,9 +88,12 @@ class Form extends Component<IProps, CardFormCheck> {
           this.radioMaleRef.current?.checked,
           this.radioOtherRef.current?.checked
         ),
-        imageInputCheck: ValidationInputs.validateImageInput(this.imageLoadRef.current?.value),
+        imageInputCheck: ValidationInputs.validateImageInput(this.imageLoadRef.current?.files),
       },
     });
+    if (!this.state.formChecks?.imageInputCheck) {
+      this.getImage(this.imageLoadRef.current?.files);
+    }
     return (
       !this.state.formChecks?.nameCheck &&
       !this.state.formChecks?.surnameCheck &&

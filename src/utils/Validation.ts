@@ -41,10 +41,23 @@ export default class ValidationInputs {
     return false;
   }
 
-  static validateImageInput(value: string | undefined) {
-    if (!value) {
+  static validateImageInput(files: FileList | null | undefined) {
+    if (!files) {
       return 'Upload image';
     }
-    return false;
+    if (files && files[0]) {
+      if (files[0].size > 3145728) {
+        return 'Size > 3MB';
+      } else {
+        const fileTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        const extension = files[0].name.split('.').pop()?.toLowerCase();
+        if (extension && fileTypes.includes(extension)) {
+          return false;
+        } else {
+          return 'Wrong type of file';
+        }
+      }
+    }
+    return 'Upload image';
   }
 }
