@@ -1,0 +1,19 @@
+.radio {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.radio__container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.radio__title {
+  font-weight: 400;
+}
+
+.radio__input {
+  margin-right: 10px;
+}

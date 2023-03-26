@@ -1,0 +1,96 @@
+.checkbox__container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.checkbox__container .checkbox__label {
+  display: inline-block;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+}
+.checkbox__container .checkbox__label .checkbox__span {
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
+  transform-origin: center;
+  border: 2px solid #333;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 10px;
+  transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89);
+}
+.checkbox__container .checkbox__label .checkbox__span:before {
+  content: "";
+  width: 0px;
+  height: 2px;
+  border-radius: 2px;
+  background: #333;
+  position: absolute;
+  transform: rotate(45deg);
+  top: 11px;
+  left: 7px;
+  transition: width 50ms ease 50ms;
+  transform-origin: 0 0;
+}
+.checkbox__container .checkbox__label .checkbox__span:after {
+  content: "";
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: #333;
+  position: absolute;
+  transform: rotate(305deg);
+  top: 15px;
+  left: 9px;
+  transition: width 50ms ease;
+  transform-origin: 0 0;
+}
+.checkbox__container .checkbox__label:hover .checkbox__span:before {
+  width: 5px;
+  transition: width 100ms ease;
+}
+.checkbox__container .checkbox__label:hover .checkbox__span:after {
+  width: 10px;
+  transition: width 150ms ease 100ms;
+}
+
+.checkbox__container input[type=checkbox] {
+  display: none;
+}
+.checkbox__container input[type=checkbox]:checked + .checkbox__label .checkbox__span {
+  background-color: #333;
+  transform: scale(1.25);
+}
+.checkbox__container input[type=checkbox]:checked + .checkbox__label .checkbox__span:after {
+  width: 10px;
+  background: #fff;
+  transition: width 150ms ease 100ms;
+}
+.checkbox__container input[type=checkbox]:checked + .checkbox__label .checkbox__span:before {
+  width: 5px;
+  background: #fff;
+  transition: width 150ms ease 100ms;
+}
+.checkbox__container input[type=checkbox]:checked + .checkbox__label:hover .checkbox__span {
+  background-color: #333;
+  transform: scale(1.25);
+}
+.checkbox__container input[type=checkbox]:checked + .checkbox__label:hover .checkbox__span:after {
+  width: 10px;
+  background: #fff;
+  transition: width 150ms ease 100ms;
+}
+.checkbox__container input[type=checkbox]:checked + .checkbox__label:hover .checkbox__span:before {
+  width: 5px;
+  background: #fff;
+  transition: width 150ms ease 100ms;
+}
