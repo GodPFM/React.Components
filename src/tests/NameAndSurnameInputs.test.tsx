@@ -1,8 +1,6 @@
 import React from 'react';
 import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Header from '../components/Header/Header';
-import { BrowserRouter } from 'react-router-dom';
 import NameAndSurnameInputs from '../components/NameInputs/NameAndSurnameInputs';
 
 describe('NameAndSurnameInputs', () => {

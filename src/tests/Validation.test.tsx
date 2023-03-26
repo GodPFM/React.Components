@@ -1,7 +1,4 @@
-import React from 'react';
 import { describe, expect, test } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
-import AddCardForm from '../pages/AddCardForm';
 import ValidationInputs from '../utils/Validation';
 
 describe('Validation tests', () => {
