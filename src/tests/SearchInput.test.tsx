@@ -5,7 +5,7 @@ import Input from '../components/UI/input/Input';
 
 describe('Search input', () => {
   test('Should display entered values', async () => {
-    render(<Input />);
+    render(<Input isNeedSave={true} placeholder={'Search'} />);
     const element = screen.getByDisplayValue('');
     fireEvent.input(element, {
       target: {
