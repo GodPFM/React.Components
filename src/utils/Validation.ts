@@ -6,6 +6,9 @@ export default class ValidationInputs {
     if (value.length < 3) {
       return 'Length < 3';
     }
+    if (!value[0].match(/^[A-Z][a-z0-9_-]{3,19}$/i)) {
+      return 'First letter must be uppercase';
+    }
     return false;
   }
 
