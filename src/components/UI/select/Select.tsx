@@ -10,17 +10,17 @@ class Select extends Component<IProps> {
     return (
       <select
         className={classes.select}
-        name="category"
-        id="category"
+        name="profession"
+        id="profession"
         defaultValue=""
         ref={this.props.selectRef}
       >
         <option value="" disabled>
-          Choose category
+          Choose your profession
         </option>
-        <option value="electronic">Electronic</option>
-        <option value="clothes">Clothes</option>
-        <option value="shoes">Shoes</option>
+        <option value="programmer">Programmer</option>
+        <option value="designer">Designer</option>
+        <option value="other">Other</option>
       </select>
     );
   }

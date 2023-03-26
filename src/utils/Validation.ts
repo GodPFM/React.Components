@@ -15,8 +15,8 @@ export default class ValidationInputs {
       return 'Field is empty';
     }
     const dateValue = new Date(value);
-    if (Number(dateValue) - Number(dateNow) < 0) {
-      return 'The date has passed';
+    if (Number(dateValue) - Number(dateNow) > 0) {
+      return 'The date not has passed';
     }
     return false;
   }
