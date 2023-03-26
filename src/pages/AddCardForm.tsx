@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Input from '../components/UI/input/Input';
 import '../styles/AddCardForm.css';
-import Select from '../components/UI/select/Select';
 import Checkbox from '../components/UI/checkbox/Checkbox';
 import Radiobutton from '../components/UI/radiobutton/Radiobutton';
 import ImageInput from '../components/UI/imageInput/ImageInput';
@@ -9,24 +7,12 @@ import Button from '../components/UI/button/Button';
 import ValidationInputs from '../utils/Validation';
 import ErrorMessage from '../components/UI/errorMessage/ErrorMessage';
 import NameAndSurnameInputs from '../components/NameInputs/NameAndSurnameInputs';
-import { b } from 'vitest/dist/types-5872e574';
 import DateAndSelectInputs from '../components/DateAndSelectInputs/DateAndSelectInputs';
+import { CardFormCheck } from '../types/CardForm';
+import getSex from '../utils/getSex';
+import CardsWithUsers from '../components/CardsWithUsers/CardsWithUsers';
 
-interface IProps {
-  test?: string;
-}
-
-interface IState {
-  nameCheck?: string | boolean;
-  surnameCheck?: string | boolean;
-  dateCheck?: string | boolean;
-  selectCheck?: string | boolean;
-  checkboxCheck?: string | boolean;
-  radioCheck?: string | boolean;
-  imageInputCheck?: string | boolean;
-}
-
-class AddCardForm extends Component<IProps, IState> {
+class AddCardForm extends Component<object, CardFormCheck> {
   public nameRef = React.createRef<HTMLInputElement>();
   public surnameRef = React.createRef<HTMLInputElement>();
   public dateRef = React.createRef<HTMLInputElement>();
@@ -36,28 +22,61 @@ class AddCardForm extends Component<IProps, IState> {
   public radioWomanRef = React.createRef<HTMLInputElement>();
   public radioOtherRef = React.createRef<HTMLInputElement>();
   public imageLoadRef = React.createRef<HTMLInputElement>();
-  constructor(props: IProps) {
+  constructor(props: object) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {};
+    this.getImage = this.getImage.bind(this);
+    this.state = {
+      cards: [],
+    };
   }
 
-  handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  getImage(file: FileList) {
+    const image = URL.createObjectURL(file[0]);
+    console.log(image);
+    this.setState({ image: image });
+  }
+
+  async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(this.nameRef.current?.value);
-    this.setState({
-      nameCheck: ValidationInputs.validateInputText(this.nameRef.current?.value),
-      surnameCheck: ValidationInputs.validateInputText(this.surnameRef.current?.value),
-      dateCheck: ValidationInputs.validateInputDate(this.dateRef.current?.value),
-      selectCheck: ValidationInputs.validateSelect(this.selectRef.current?.value),
-      checkboxCheck: ValidationInputs.validateCheckbox(this.checkboxRef.current?.checked),
-      radioCheck: ValidationInputs.validateRadioInput(
-        this.radioWomanRef.current?.checked,
-        this.radioMaleRef.current?.checked,
-        this.radioOtherRef.current?.checked
-      ),
-      imageInputCheck: ValidationInputs.validateImageInput(this.imageLoadRef.current?.value),
+    console.log(this.imageLoadRef.current?.value);
+    await this.setState({
+      formChecks: {
+        nameCheck: ValidationInputs.validateInputText(this.nameRef.current?.value),
+        surnameCheck: ValidationInputs.validateInputText(this.surnameRef.current?.value),
+        dateCheck: ValidationInputs.validateInputDate(this.dateRef.current?.value),
+        selectCheck: ValidationInputs.validateSelect(this.selectRef.current?.value),
+        checkboxCheck: ValidationInputs.validateCheckbox(this.checkboxRef.current?.checked),
+        radioCheck: ValidationInputs.validateRadioInput(
+          this.radioWomanRef.current?.checked,
+          this.radioMaleRef.current?.checked,
+          this.radioOtherRef.current?.checked
+        ),
+        imageInputCheck: ValidationInputs.validateImageInput(this.imageLoadRef.current?.value),
+      },
     });
+    if (
+      !this.state.formChecks?.nameCheck &&
+      !this.state.formChecks?.surnameCheck &&
+      !this.state.formChecks?.dateCheck &&
+      !this.state.formChecks?.selectCheck &&
+      !this.state.formChecks?.checkboxCheck &&
+      !this.state.formChecks?.radioCheck &&
+      !this.state.formChecks?.imageInputCheck
+    ) {
+      console.log(1);
+      const sex = getSex(this.radioWomanRef.current?.checked, this.radioMaleRef.current?.checked);
+      if (this.nameRef.current?.value && this.surnameRef.current?.value) {
+        const objectData = {
+          name: `${this.nameRef.current.value} ${this.surnameRef.current.value}`,
+          date: this.dateRef.current?.value,
+          profession: this.selectRef.current?.value,
+          sex: sex,
+          image: this.state.image,
+        };
+        this.setState({ cards: [...this.state.cards, objectData] });
+      }
+    }
   }
   render() {
     return (
@@ -67,14 +86,14 @@ class AddCardForm extends Component<IProps, IState> {
           <NameAndSurnameInputs
             nameRef={this.nameRef}
             surnameRef={this.surnameRef}
-            nameError={this.state.nameCheck}
-            surnameError={this.state.surnameCheck}
+            nameError={this.state.formChecks?.nameCheck}
+            surnameError={this.state.formChecks?.surnameCheck}
           />
           <DateAndSelectInputs
             dateRef={this.dateRef}
             selectRef={this.selectRef}
-            dateError={this.state.dateCheck}
-            selectError={this.state.selectCheck}
+            dateError={this.state.formChecks?.dateCheck}
+            selectError={this.state.formChecks?.selectCheck}
           />
           <Radiobutton
             values={[
@@ -85,17 +104,24 @@ class AddCardForm extends Component<IProps, IState> {
             name={'sex'}
             title={'Sex:'}
           />
-          {this.state.radioCheck && <ErrorMessage text={this.state.radioCheck} />}
-          <ImageInput imageInputRef={this.imageLoadRef} />
-          {this.state.imageInputCheck && <ErrorMessage text={this.state.imageInputCheck} />}
+          {this.state.formChecks?.radioCheck && (
+            <ErrorMessage text={this.state.formChecks?.radioCheck} />
+          )}
+          <ImageInput imageInputRef={this.imageLoadRef} getImage={this.getImage} />
+          {this.state.formChecks?.imageInputCheck && (
+            <ErrorMessage text={this.state.formChecks?.imageInputCheck} />
+          )}
           <Checkbox
             value={'terms'}
             text={'I accept terms and conditions'}
             checkboxRef={this.checkboxRef}
           />
-          {this.state.checkboxCheck && <ErrorMessage text={this.state.checkboxCheck} />}
+          {this.state.formChecks?.checkboxCheck && (
+            <ErrorMessage text={this.state.formChecks?.checkboxCheck} />
+          )}
           <Button text={'Submit'} />
         </form>
+        <CardsWithUsers cards={this.state.cards} />
       </div>
     );
   }
