@@ -4,4 +4,5 @@ export interface CardWithUsers {
   profession?: string;
   sex?: string;
   image?: string;
+  agreeGetNotification?: boolean;
 }

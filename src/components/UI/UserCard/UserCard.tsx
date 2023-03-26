@@ -15,6 +15,7 @@ class UserCard extends Component<IProps> {
         <p>Profession: {this.props.card.profession}</p>
         <p>Sex: {this.props.card.sex}</p>
         <p>Accepted terms</p>
+        {this.props.card.agreeGetNotification && <p>Agree to get notifications</p>}
       </div>
     );
   }

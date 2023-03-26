@@ -22,7 +22,8 @@ class Form extends Component<IProps, CardFormCheck> {
   public surnameRef = React.createRef<HTMLInputElement>();
   public dateRef = React.createRef<HTMLInputElement>();
   public selectRef = React.createRef<HTMLSelectElement>();
-  public checkboxRef = React.createRef<HTMLInputElement>();
+  public checkboxTermsRef = React.createRef<HTMLInputElement>();
+  public checkboxNotificationRef = React.createRef<HTMLInputElement>();
   public radioMaleRef = React.createRef<HTMLInputElement>();
   public radioWomanRef = React.createRef<HTMLInputElement>();
   public radioOtherRef = React.createRef<HTMLInputElement>();
@@ -70,6 +71,7 @@ class Form extends Component<IProps, CardFormCheck> {
         profession: this.selectRef.current?.value,
         sex: sex,
         image: this.state.image,
+        agreeGetNotification: this.checkboxNotificationRef.current?.checked,
       };
       this.props.setCard(objectData);
     }
@@ -82,7 +84,7 @@ class Form extends Component<IProps, CardFormCheck> {
         surnameCheck: ValidationInputs.validateInputText(this.surnameRef.current?.value),
         dateCheck: ValidationInputs.validateInputDate(this.dateRef.current?.value),
         selectCheck: ValidationInputs.validateSelect(this.selectRef.current?.value),
-        checkboxCheck: ValidationInputs.validateCheckbox(this.checkboxRef.current?.checked),
+        checkboxCheck: ValidationInputs.validateCheckbox(this.checkboxTermsRef.current?.checked),
         radioCheck: ValidationInputs.validateRadioInput(
           this.radioWomanRef.current?.checked,
           this.radioMaleRef.current?.checked,
@@ -138,11 +140,16 @@ class Form extends Component<IProps, CardFormCheck> {
         <Checkbox
           value={'terms'}
           text={'I accept terms and conditions'}
-          checkboxRef={this.checkboxRef}
+          checkboxRef={this.checkboxTermsRef}
         />
         {this.state.formChecks?.checkboxCheck && (
           <ErrorMessage text={this.state.formChecks?.checkboxCheck} />
         )}
+        <Checkbox
+          value={'notification'}
+          text={'I agree to get notifications'}
+          checkboxRef={this.checkboxNotificationRef}
+        />
         <Button
           onClck={(e: React.MouseEvent) => {
             e.preventDefault();
