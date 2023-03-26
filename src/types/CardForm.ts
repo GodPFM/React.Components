@@ -11,5 +11,6 @@ export type CardFormCheck = {
     imageInputCheck: string | boolean;
   };
   image?: string;
+  openModal: boolean;
   cards: CardWithUsers[];
 };

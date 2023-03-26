@@ -27,6 +27,7 @@ class ImageInput extends Component<IProps, IState> {
       if (target.files && target.files[0]) {
         if (target.files[0].size > 3145728) {
           this.setState({ isError: 'Size > 3MB' });
+          e.target.value = '';
           return;
         } else {
           const fileTypes = ['jpg', 'jpeg', 'png', 'gif'];
@@ -54,7 +55,6 @@ class ImageInput extends Component<IProps, IState> {
               accept="image/png, image/jpg, image/jpeg, image/gif"
               ref={this.props.imageInputRef}
             />
-            <span className={classes.imageInput__text}>{this.state.imageName}</span>
           </label>
         </div>
         {this.state.isError && <ErrorMessage text={this.state.isError} />}

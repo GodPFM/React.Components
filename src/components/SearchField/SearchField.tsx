@@ -14,7 +14,7 @@ class SearchField extends Component<IProps> {
         <Link className="search__create-link" to={'add-item'} onClick={this.props.openModal}>
           <Button text={'Create card'} />
         </Link>
-        <Input name={'search'} placeholder={'Search'} />
+        <Input name={'search'} placeholder={'Search'} isNeedSave={true} />
       </div>
     );
   }

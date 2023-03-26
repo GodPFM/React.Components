@@ -1,3 +1,3 @@
-export default function getSex(male: boolean | undefined, woman: boolean | undefined) {
+export default function getSex(woman: boolean | undefined, male: boolean | undefined) {
   return male ? 'male' : woman ? 'woman' : 'other';
 }

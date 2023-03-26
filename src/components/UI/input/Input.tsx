@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './Input.module.css';
 
 interface IProps {
+  isNeedSave: boolean;
   name?: string;
   placeholder: string;
   labelForInput?: string;
@@ -28,24 +29,30 @@ class Input extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    const value = localStorage.getItem(`${this.props.name}Input`);
-    if (value) {
-      this.setState({ inputValue: value });
-    } else {
-      this.setState({ inputValue: '' });
+    if (this.props.isNeedSave) {
+      const value = localStorage.getItem(`${this.props.name}Input`);
+      if (value) {
+        this.setState({ inputValue: value });
+      } else {
+        this.setState({ inputValue: '' });
+      }
+      window.addEventListener('beforeunload', this.handleWindowBeforeUnload);
     }
-    window.addEventListener('beforeunload', this.handleWindowBeforeUnload);
   }
 
   handleWindowBeforeUnload = () => {
-    const value = this.state.inputValue;
-    localStorage.setItem(`${this.props.name}Input`, value);
+    if (this.props.isNeedSave) {
+      const value = this.state.inputValue;
+      localStorage.setItem(`${this.props.name}Input`, value);
+    }
   };
 
   componentWillUnmount() {
-    const value = this.state.inputValue;
-    window.removeEventListener('beforeunload', this.handleWindowBeforeUnload);
-    localStorage.setItem(`${this.props.name}Input`, value);
+    if (this.props.isNeedSave) {
+      const value = this.state.inputValue;
+      window.removeEventListener('beforeunload', this.handleWindowBeforeUnload);
+      localStorage.setItem(`${this.props.name}Input`, value);
+    }
   }
 
   render() {

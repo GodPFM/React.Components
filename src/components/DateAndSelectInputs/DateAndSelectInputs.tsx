@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Input from '../UI/input/Input';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import Select from '../UI/select/Select';
 import classes from './DateAndSelectInputs.module.css';
+import FormInput from '../UI/formInput/FormInput';
 
 interface IProps {
   dateRef: React.Ref<HTMLInputElement> | null | undefined;
@@ -15,7 +15,7 @@ class DateAndSelectInputs extends Component<IProps> {
     return (
       <div className={classes.container}>
         <div>
-          <Input
+          <FormInput
             placeholder={'Birthday'}
             type={'date'}
             labelForInput={'Birthday:'}

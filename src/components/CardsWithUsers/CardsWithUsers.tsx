@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ProductItem from '../UI/productItem/ProductItem';
 import { CardWithUsers } from '../../types/CardWithUsers';
 import UserCard from '../UI/UserCard/UserCard';
 

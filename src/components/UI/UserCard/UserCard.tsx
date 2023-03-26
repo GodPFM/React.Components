@@ -14,6 +14,7 @@ class UserCard extends Component<IProps> {
         <p>Birthday: {this.props.card.date}</p>
         <p>Profession: {this.props.card.profession}</p>
         <p>Sex: {this.props.card.sex}</p>
+        <p>Accepted terms</p>
       </div>
     );
   }
