@@ -7,7 +7,7 @@ describe('Products page', () => {
   test('Must render product page', async () => {
     Object.defineProperty(window, 'location', {
       get() {
-        return { pathname: '/products/23' };
+        return { pathname: '/products/37' };
       },
     });
     render(<ProductPage />);

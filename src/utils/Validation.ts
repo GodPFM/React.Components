@@ -6,7 +6,6 @@ export default class ValidationInputs {
     if (value.length < 3) {
       return 'Length < 3';
     }
-    console.log(value);
     if (value.charAt(0) !== value.charAt(0).toUpperCase()) {
       return 'First letter must be uppercase';
     }

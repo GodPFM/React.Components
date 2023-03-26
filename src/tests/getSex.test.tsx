@@ -1,7 +1,5 @@
 import React from 'react';
 import { describe, expect, test } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import Page404 from '../pages/Page404';
 import getSex from '../utils/getSex';
 
 describe('Get sex', () => {

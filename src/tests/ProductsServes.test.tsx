@@ -13,10 +13,10 @@ describe('Products serves', () => {
     );
   });
   test('returns object by id', async () => {
-    const response = await ProductsServes.getById('23');
+    const response = await ProductsServes.getById('37');
     expect(typeof response).toBe('object');
     if (typeof response !== 'boolean') {
-      expect(response.data.id).toBe(23);
+      expect(response.data.id).toBe(37);
     }
   });
   test('returns array of products', async () => {
