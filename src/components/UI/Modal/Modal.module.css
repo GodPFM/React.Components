@@ -15,12 +15,14 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal__container {
   margin: 20px auto;
   width: 400px;
-  min-height: 400px;
   max-height: 80%;
   overflow: auto;
   border-radius: 25px;
