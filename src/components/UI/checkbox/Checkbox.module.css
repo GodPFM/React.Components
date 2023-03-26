@@ -29,7 +29,7 @@
   transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89);
 }
 .checkbox__container .checkbox__label .checkbox__span:before {
-  content: "";
+  content: '';
   width: 0px;
   height: 2px;
   border-radius: 2px;
@@ -42,7 +42,7 @@
   transform-origin: 0 0;
 }
 .checkbox__container .checkbox__label .checkbox__span:after {
-  content: "";
+  content: '';
   width: 0;
   height: 2px;
   border-radius: 2px;
@@ -63,33 +63,36 @@
   transition: width 150ms ease 100ms;
 }
 
-.checkbox__container input[type=checkbox] {
+.checkbox__container input[type='checkbox'] {
   display: none;
 }
-.checkbox__container input[type=checkbox]:checked + .checkbox__label .checkbox__span {
+.checkbox__container input[type='checkbox']:checked + .checkbox__label .checkbox__span {
   background-color: #333;
   transform: scale(1.25);
 }
-.checkbox__container input[type=checkbox]:checked + .checkbox__label .checkbox__span:after {
+.checkbox__container input[type='checkbox']:checked + .checkbox__label .checkbox__span:after {
   width: 10px;
   background: #fff;
   transition: width 150ms ease 100ms;
 }
-.checkbox__container input[type=checkbox]:checked + .checkbox__label .checkbox__span:before {
+.checkbox__container input[type='checkbox']:checked + .checkbox__label .checkbox__span:before {
   width: 5px;
   background: #fff;
   transition: width 150ms ease 100ms;
 }
-.checkbox__container input[type=checkbox]:checked + .checkbox__label:hover .checkbox__span {
+.checkbox__container input[type='checkbox']:checked + .checkbox__label:hover .checkbox__span {
   background-color: #333;
   transform: scale(1.25);
 }
-.checkbox__container input[type=checkbox]:checked + .checkbox__label:hover .checkbox__span:after {
+.checkbox__container input[type='checkbox']:checked + .checkbox__label:hover .checkbox__span:after {
   width: 10px;
   background: #fff;
   transition: width 150ms ease 100ms;
 }
-.checkbox__container input[type=checkbox]:checked + .checkbox__label:hover .checkbox__span:before {
+.checkbox__container
+  input[type='checkbox']:checked
+  + .checkbox__label:hover
+  .checkbox__span:before {
   width: 5px;
   background: #fff;
   transition: width 150ms ease 100ms;

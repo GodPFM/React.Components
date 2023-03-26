@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import classes from './Radiobutton.module.css';
 
 interface IProps {
-  values: Array<string>;
+  values: Array<[string, React.Ref<HTMLInputElement> | null | undefined]>;
   name: string;
   title: string;
+  maleRef?: React.Ref<HTMLInputElement> | null | undefined;
+  womanRef?: React.Ref<HTMLInputElement> | null | undefined;
 }
 
 class Radiobutton extends Component<IProps> {
@@ -19,9 +21,10 @@ class Radiobutton extends Component<IProps> {
                 className={classes.radio__input}
                 type="radio"
                 name={this.props.name}
-                value={item}
+                value={item[0]}
+                ref={item[1]}
               />
-              {item}
+              {item[0]}
             </label>
           ))}
         </div>

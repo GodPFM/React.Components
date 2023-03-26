@@ -1,6 +1,8 @@
 .imageInput__wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -43,14 +45,14 @@
 }
 
 .imageInput__container .imageInput__input:focus + .imageInput__text {
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .imageInput__container:hover .imageInput__text {
   background-color: #59be6e;
 }
 .imageInput__container:active .imageInput__text {
-  background-color: #2E703A;
+  background-color: #2e703a;
 }
 
 .imageInput__container .imageInput__input:disabled + .imageInput__text {

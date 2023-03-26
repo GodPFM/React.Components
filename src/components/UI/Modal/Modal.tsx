@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classes from './Modal.module.css';
-import { Link } from 'react-router-dom';
 
 interface IProps {
   children: React.ReactNode;

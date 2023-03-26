@@ -37,7 +37,7 @@ class MainPage extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    window.onpopstate = (e) => {
+    window.onpopstate = () => {
       if (location.pathname === '/') {
         this.setState({ isModalOpen: false });
       }

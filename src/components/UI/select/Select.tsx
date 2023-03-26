@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import classes from './Select.module.css';
 
-class Select extends Component {
+interface IProps {
+  selectRef?: React.Ref<HTMLSelectElement> | null | undefined;
+}
+
+class Select extends Component<IProps> {
   render() {
     return (
-      <select className={classes.select} name="category" id="category">
-        <option value="" disabled selected>
+      <select
+        className={classes.select}
+        name="category"
+        id="category"
+        defaultValue=""
+        ref={this.props.selectRef}
+      >
+        <option value="" disabled>
           Choose category
         </option>
         <option value="electronic">Electronic</option>

@@ -6,6 +6,7 @@ interface IProps {
   placeholder: string;
   labelForInput?: string;
   type?: string;
+  inputRef?: React.Ref<HTMLInputElement> | null | undefined;
 }
 interface IState {
   inputValue: string;
@@ -55,6 +56,7 @@ class Input extends Component<IProps, IState> {
         )}
         <input
           className={classes.searchInput}
+          ref={this.props.inputRef}
           value={this.state.inputValue}
           onInput={this.handleChange}
           placeholder={this.props.placeholder}
