@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/MainPage.css';
 import { IApiResponse } from '../types/APIResponse';
 import ProductsServes from '../API/ProductsServes';
@@ -9,91 +9,75 @@ import CardsContainer from '../components/CardsContainer';
 import Modal from '../components/UI/Modal/Modal';
 import AddCardForm from './AddCardForm';
 
-interface IState {
-  isLoading: boolean;
-  isCardsLoading: boolean;
-  products: IApiResponse[];
-  page: number;
-  isModalOpen: boolean;
-}
-
 interface IProps {
   isOpenCreateCards?: boolean;
 }
 
-class MainPage extends Component<IProps, IState> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      isLoading: true,
-      isCardsLoading: true,
-      products: [],
-      page: 0,
-      isModalOpen: !!this.props.isOpenCreateCards,
-    };
-    this.getMoreCards = this.getMoreCards.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
+function MainPage(props: IProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isCardsLoading, setIsCardsLoading] = useState(true);
+  const [products, setProducts] = useState([] as IApiResponse[]);
+  const [page, setPage] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(!!props.isOpenCreateCards);
 
-  async componentDidMount() {
+  useEffect(() => {
     window.onpopstate = () => {
       if (location.pathname === '/') {
-        this.setState({ isModalOpen: false });
+        setIsModalOpen(false);
       }
     };
-    const items = await this.getItems(this.state.page);
-    if (items) {
-      if (items.data) {
-        this.setState({
-          isCardsLoading: false,
-          isLoading: false,
-          products: items.data,
-        });
+    const getNewItems = async () => {
+      const items = await getItems(page);
+      if (items) {
+        if (items.data) {
+          setIsCardsLoading(false);
+          setIsLoading(false);
+          setProducts([...products, ...items.data]);
+        }
       }
-    }
-  }
+    };
+    getNewItems();
+  }, []);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-  async getItems(page: number) {
-    return await ProductsServes.getAll(12, page);
-  }
-
-  async getMoreCards() {
-    this.setState({ isLoading: true });
-    const items = await this.getItems(this.state.page + 12);
-    this.setState({
-      page: this.state.page + 12,
-      products: [...this.state.products, ...items.data],
-      isLoading: false,
-    });
-  }
-
-  openModal() {
-    this.setState({ isModalOpen: true });
-  }
-
-  closeModal() {
-    this.setState({ isModalOpen: false });
+  const closeModal = () => {
+    setIsModalOpen(false);
     history.go(-1);
-  }
+  };
 
-  render() {
-    return (
+  const getItems = async (page: number) => {
+    return await ProductsServes.getAll(12, page);
+  };
+
+  const getMoreCards = async () => {
+    setIsLoading(true);
+    setIsCardsLoading(true);
+    const items = await getItems(page + 12);
+    setPage(page + 12);
+    setProducts([...products, ...items.data]);
+    setIsLoading(false);
+    setIsCardsLoading(false);
+  };
+
+  return (
+    <div>
       <div className="mainPage">
-        <SearchField openModal={this.openModal} />
-        <CardsContainer products={this.state.products} isCardsLoading={this.state.isLoading} />
-        {this.state.isLoading && <Loader />}
-        {this.state.page < 188 && !this.state.isCardsLoading && (
-          <Button text={'Download more'} onClck={() => this.getMoreCards()}></Button>
+        <SearchField openModal={openModal} />
+        <CardsContainer products={products} isCardsLoading={isLoading} />
+        {isLoading && <Loader />}
+        {page < 188 && !isCardsLoading && (
+          <Button text={'Download more'} onClck={getMoreCards}></Button>
         )}
-        {this.state.isModalOpen && (
-          <Modal closeModal={this.closeModal}>
+        {isModalOpen && (
+          <Modal closeModal={closeModal}>
             <AddCardForm />
           </Modal>
         )}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default MainPage;
