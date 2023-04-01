@@ -6,26 +6,14 @@ import Button from '../components/UI/button/Button';
 import Loader from '../components/UI/loading/Loader';
 import SearchField from '../components/SearchField/SearchField';
 import CardsContainer from '../components/CardsContainer';
-import Modal from '../components/UI/Modal/Modal';
-import AddCardForm from './AddCardForm';
 
-interface IProps {
-  isOpenCreateCards?: boolean;
-}
-
-function MainPage(props: IProps) {
+function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isCardsLoading, setIsCardsLoading] = useState(true);
   const [products, setProducts] = useState([] as IApiResponse[]);
   const [page, setPage] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(!!props.isOpenCreateCards);
 
   useEffect(() => {
-    window.onpopstate = () => {
-      if (location.pathname === '/') {
-        setIsModalOpen(false);
-      }
-    };
     const getNewItems = async () => {
       const items = await getItems(page);
       if (items) {
@@ -38,14 +26,6 @@ function MainPage(props: IProps) {
     };
     getNewItems();
   }, []);
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    history.go(-1);
-  };
 
   const getItems = async (page: number) => {
     return await ProductsServes.getAll(12, page);
@@ -64,16 +44,11 @@ function MainPage(props: IProps) {
   return (
     <div>
       <div className="mainPage">
-        <SearchField openModal={openModal} />
+        <SearchField />
         <CardsContainer products={products} isCardsLoading={isLoading} />
         {isLoading && <Loader />}
         {page < 188 && !isCardsLoading && (
           <Button text={'Download more'} onClck={getMoreCards}></Button>
-        )}
-        {isModalOpen && (
-          <Modal closeModal={closeModal}>
-            <AddCardForm />
-          </Modal>
         )}
       </div>
     </div>
