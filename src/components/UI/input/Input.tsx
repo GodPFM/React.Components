@@ -14,21 +14,23 @@ const Input = (props: IProps) => {
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
-    if (props.isNeedSave) {
-      const value = localStorage.getItem(`${props.name}Input`);
-      if (value) {
-        setInputValue(value);
-      } else {
-        setInputValue('');
+    const restoreData = () => {
+      if (props.isNeedSave) {
+        const value = localStorage.getItem(`${props.name}Input`);
+        if (value) {
+          setInputValue(value);
+        } else {
+          setInputValue('');
+        }
+        window.addEventListener('beforeunload', handleWindowBeforeUnload);
       }
-      window.addEventListener('beforeunload', handleWindowBeforeUnload);
-    }
-  }, []);
+    };
+    restoreData();
+  });
 
   useEffect(() => {
     return () => {
       if (props.isNeedSave) {
-        console.log(inputValue);
         window.removeEventListener('beforeunload', handleWindowBeforeUnload);
         localStorage.setItem(`${props.name}Input`, inputValue);
       }

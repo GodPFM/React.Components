@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classes from './Radiobutton.module.css';
 import { UseFormRegister } from 'react-hook-form';
 import { CardFormData } from '../../../types/CardForm';

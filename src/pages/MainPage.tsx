@@ -25,7 +25,7 @@ function MainPage() {
       }
     };
     getNewItems();
-  }, []);
+  });
 
   const getItems = async (page: number) => {
     return await ProductsServes.getAll(12, page);
