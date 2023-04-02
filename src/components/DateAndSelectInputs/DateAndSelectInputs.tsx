@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import Select from '../UI/select/Select';
 import classes from './DateAndSelectInputs.module.css';
@@ -13,34 +13,33 @@ interface IProps {
   dateError: string | boolean | undefined;
   selectError: string | boolean | undefined;
 }
-class DateAndSelectInputs extends Component<IProps> {
-  render() {
-    return (
-      <div className={classes.container}>
-        <div>
-          <FormInput
-            placeholder={'Birthday'}
-            type={'date'}
-            labelForInput={'Birthday:'}
-            name={'birthdate'}
-            register={this.props.dateRef}
-            validate={{
-              required: 'Value is empty',
-              validate: (date) => {
-                const validate = ValidationInputs.validateInputDate(date);
-                return validate ? validate : true;
-              },
-            }}
-          />
-          {this.props.dateError && <ErrorMessage text={this.props.dateError} />}
-        </div>
-        <div>
-          <Select register={this.props.selectRef} />
-          {this.props.selectError && <ErrorMessage text={this.props.selectError} />}
-        </div>
+
+const DateAndSelectInputs = (props: IProps) => {
+  return (
+    <div className={classes.container}>
+      <div>
+        <FormInput
+          placeholder={'Birthday'}
+          type={'date'}
+          labelForInput={'Birthday:'}
+          name={'birthdate'}
+          register={props.dateRef}
+          validate={{
+            required: 'Value is empty',
+            validate: (date) => {
+              const validate = ValidationInputs.validateInputDate(date);
+              return validate ? validate : true;
+            },
+          }}
+        />
+        {props.dateError && <ErrorMessage text={props.dateError} />}
       </div>
-    );
-  }
-}
+      <div>
+        <Select register={props.selectRef} />
+        {props.selectError && <ErrorMessage text={props.selectError} />}
+      </div>
+    </div>
+  );
+};
 
 export default DateAndSelectInputs;
