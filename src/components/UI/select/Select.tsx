@@ -11,6 +11,7 @@ const Select = (props: IProps) => {
   return (
     <select
       className={classes.select}
+      data-testid="professionSelect"
       id="profession"
       defaultValue=""
       {...props.register('professionSelect', {
