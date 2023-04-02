@@ -16,18 +16,15 @@ const Input = (props: IProps) => {
   searchValue.current = inputValue;
 
   useLayoutEffect(() => {
-    const restoreData = () => {
-      if (props.isNeedSave) {
-        const value = localStorage.getItem(`${props.name}Input`);
-        window.addEventListener('beforeunload', handleWindowBeforeUnload);
-        if (value) {
-          setInputValue(value);
-        } else {
-          setInputValue('');
-        }
+    if (props.isNeedSave) {
+      const value = localStorage.getItem(`${props.name}Input`);
+      window.addEventListener('beforeunload', handleWindowBeforeUnload);
+      if (value) {
+        setInputValue(value);
+      } else {
+        setInputValue('');
       }
-    };
-    restoreData();
+    }
     return () => {
       if (props.isNeedSave) {
         window.removeEventListener('beforeunload', handleWindowBeforeUnload);
