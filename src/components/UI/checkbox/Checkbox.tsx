@@ -16,7 +16,6 @@ const Checkbox = (props: IProps) => {
       <input
         type="checkbox"
         id={props.value}
-        value={props.value}
         {...props.checkboxRef(`${props.value}Checkbox`, props.required)}
       />
       <label className={classes.checkbox__label} htmlFor={props.value}>

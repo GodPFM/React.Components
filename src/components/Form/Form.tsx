@@ -175,6 +175,10 @@ const Form = (props: IProps) => {
   } = useForm<CardFormData>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
+    defaultValues: {
+      termsCheckbox: false,
+      notificationCheckbox: false,
+    },
   });
   const [openModal, setOpenModal] = useState(false);
   const [image, setImage] = useState('');
