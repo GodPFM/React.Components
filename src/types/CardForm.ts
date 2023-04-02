@@ -14,3 +14,14 @@ export type CardFormCheck = {
   openModal: boolean;
   cards: CardWithUsers[];
 };
+
+export type CardFormData = {
+  birthdate: string;
+  inputImage: FileList;
+  name: string;
+  notificationCheckbox: boolean;
+  termsCheckbox: boolean;
+  professionSelect: string;
+  radioSex: string;
+  surname: string;
+};

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import classes from './Select.module.css';
+import { UseFormRegister } from 'react-hook-form';
+import { CardFormData } from '../../../types/CardForm';
 
 interface IProps {
-  selectRef?: React.Ref<HTMLSelectElement> | null | undefined;
+  register: UseFormRegister<CardFormData>;
 }
 
 class Select extends Component<IProps> {
@@ -10,10 +12,11 @@ class Select extends Component<IProps> {
     return (
       <select
         className={classes.select}
-        name="profession"
         id="profession"
         defaultValue=""
-        ref={this.props.selectRef}
+        {...this.props.register('professionSelect', {
+          required: 'Select one option',
+        })}
       >
         <option value="" disabled>
           Choose your profession

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import classes from './FormInput.module.css';
+import { RegisterOptions, UseFormRegister } from 'react-hook-form';
+import { CardFormData } from '../../../types/CardForm';
 
 interface IProps {
-  name: string;
+  name: 'name' | 'surname' | 'birthdate';
   placeholder: string;
   labelForInput: string;
   type: string;
-  inputRef: React.Ref<HTMLInputElement> | null | undefined;
+  register: UseFormRegister<CardFormData>;
+  validate: RegisterOptions | undefined;
 }
 
 class FormInput extends Component<IProps> {
@@ -18,11 +21,10 @@ class FormInput extends Component<IProps> {
         )}
         <input
           className={classes.formInput}
-          ref={this.props.inputRef}
           placeholder={this.props.placeholder}
-          name={this.props.name}
           id={this.props.name}
           type={this.props.type}
+          {...this.props.register(this.props.name, { ...this.props.validate })}
         />
       </div>
     );

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import classes from './ImageInput.module.css';
+import { UseFormRegister } from 'react-hook-form';
+import ValidationInputs from '../../../utils/Validation';
+import { CardFormData } from '../../../types/CardForm';
 
 interface IProps {
-  imageInputRef: React.Ref<HTMLInputElement> | null | undefined;
+  imageInputRef: UseFormRegister<CardFormData>;
   getImage: (file: FileList) => void;
 }
 
@@ -16,7 +19,12 @@ class ImageInput extends Component<IProps> {
               type="file"
               className={classes.imageInput__input}
               accept="image/png, image/jpg, image/jpeg, image/gif"
-              ref={this.props.imageInputRef}
+              {...this.props.imageInputRef('inputImage', {
+                validate: (data) => {
+                  const validate = ValidationInputs.validateImageInput(data as unknown as FileList);
+                  return validate ? validate : true;
+                },
+              })}
             />
           </label>
         </div>

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import classes from './Radiobutton.module.css';
+import { UseFormRegister } from 'react-hook-form';
+import { CardFormData } from '../../../types/CardForm';
 
 interface IProps {
-  values: Array<[string, React.Ref<HTMLInputElement> | null | undefined]>;
+  values: Array<string>;
   name: string;
   title: string;
-  maleRef?: React.Ref<HTMLInputElement> | null | undefined;
-  womanRef?: React.Ref<HTMLInputElement> | null | undefined;
+  register: UseFormRegister<CardFormData>;
+  radioError: string | boolean | undefined;
 }
 
 class Radiobutton extends Component<IProps> {
@@ -20,11 +22,10 @@ class Radiobutton extends Component<IProps> {
               <input
                 className={classes.radio__input}
                 type="radio"
-                name={this.props.name}
-                value={item[0]}
-                ref={item[1]}
+                value={item}
+                {...this.props.register(`radioSex`, { required: 'Choose your sex' })}
               />
-              {item[0]}
+              {item}
             </label>
           ))}
         </div>
