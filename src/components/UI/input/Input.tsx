@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import classes from './Input.module.css';
 
 interface IProps {
@@ -12,36 +12,35 @@ interface IProps {
 
 const Input = (props: IProps) => {
   const [inputValue, setInputValue] = useState('');
+  const searchValue = useRef('');
+  searchValue.current = inputValue;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const restoreData = () => {
       if (props.isNeedSave) {
         const value = localStorage.getItem(`${props.name}Input`);
+        window.addEventListener('beforeunload', handleWindowBeforeUnload);
         if (value) {
           setInputValue(value);
         } else {
           setInputValue('');
         }
-        window.addEventListener('beforeunload', handleWindowBeforeUnload);
       }
     };
     restoreData();
-  });
-
-  useEffect(() => {
     return () => {
       if (props.isNeedSave) {
         window.removeEventListener('beforeunload', handleWindowBeforeUnload);
-        localStorage.setItem(`${props.name}Input`, inputValue);
+        localStorage.setItem(`${props.name}Input`, searchValue.current);
       }
     };
-  });
+  }, []);
 
   const type = props.type ? props.type : 'text';
 
   const handleWindowBeforeUnload = () => {
     if (props.isNeedSave) {
-      localStorage.setItem(`${props.name}Input`, inputValue);
+      localStorage.setItem(`${props.name}Input`, searchValue.current);
     }
   };
 

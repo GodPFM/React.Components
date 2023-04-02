@@ -47,7 +47,6 @@ const Form = (props: IProps) => {
   };
 
   const closeModal = () => {
-    console.log(data);
     const objectData: CardWithUsers = {
       name: data.name + ' ' + data.surname,
       date: data.birthdate,

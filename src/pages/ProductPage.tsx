@@ -17,7 +17,6 @@ const ProductPage = () => {
         setIsLoading(false);
         if (item) {
           setProduct(item.data);
-          console.log(item.data);
         } else {
           setError(true);
         }

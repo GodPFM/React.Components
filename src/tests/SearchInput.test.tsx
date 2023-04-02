@@ -14,5 +14,4 @@ describe('Search input', () => {
     });
     expect(screen.getByDisplayValue('test'));
   });
-  test('test');
 });
