@@ -13,10 +13,9 @@ const ImageInput = (props: IProps) => {
   return (
     <div className={classes.imageInput__wrapper}>
       <div>
-        <label className={classes.imageInput__container}>
+        <label>
           <input
             type="file"
-            className={classes.imageInput__input}
             accept="image/png, image/jpg, image/jpeg, image/gif"
             {...props.imageInputRef('inputImage', {
               validate: (data) => {
