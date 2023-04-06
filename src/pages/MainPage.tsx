@@ -12,7 +12,7 @@ function MainPage() {
   const [isCardsLoading, setIsCardsLoading] = useState(true);
   const [products, setProducts] = useState([] as IApiResponse[]);
   const [page, setPage] = useState(0);
-
+  const [isCardEnd, setIsCardEnd] = useState(false);
   useEffect(() => {
     const getNewItems = async () => {
       const items = await getItems(page);
@@ -37,8 +37,15 @@ function MainPage() {
     const items = await getItems(page + 12);
     setPage(page + 12);
     setProducts([...products, ...items.data]);
+    if (items.data.length < 12 || items.data.length === 0) {
+      setIsCardEnd(true);
+    }
     setIsLoading(false);
     setIsCardsLoading(false);
+  };
+
+  const getFilterCards = async (value: string) => {
+    setIsLoading(true);
   };
 
   return (
@@ -47,7 +54,7 @@ function MainPage() {
         <SearchField />
         <CardsContainer products={products} isCardsLoading={isLoading} />
         {isLoading && <Loader />}
-        {page < 188 && !isCardsLoading && (
+        {!isCardEnd && !isCardsLoading && (
           <Button text={'Download more'} onClck={getMoreCards}></Button>
         )}
       </div>
