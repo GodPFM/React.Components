@@ -20,10 +20,10 @@ describe('Products serves', () => {
     }
   });
   test('returns array of products', async () => {
-    const response = await ProductsServes.getAll();
+    const response = await ProductsServes.getCards();
     const data = response.data;
     expect(data.length).toBe(12);
-    const anotherResponse = await ProductsServes.getAll(1);
+    const anotherResponse = await ProductsServes.getCards(1);
     const anotherData = anotherResponse.data;
     expect(anotherData.length).toBe(1);
   });

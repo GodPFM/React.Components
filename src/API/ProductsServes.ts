@@ -1,11 +1,13 @@
 import axios from 'axios';
 
 export default class ProductsServes {
-  static async getAll(limit = 12, offset = 0) {
-    const response = await axios.get('https://api.escuelajs.co/api/v1/products', {
+  static async getCards(limit = 12, offset = 0, filter = '') {
+    console.log(limit, offset, filter);
+    const response = await axios.get('https://api.escuelajs.co/api/v1/products/', {
       params: {
         offset: offset,
         limit: limit,
+        title: filter,
       },
     });
     return response;

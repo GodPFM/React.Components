@@ -13,28 +13,29 @@ function MainPage() {
   const [products, setProducts] = useState([] as IApiResponse[]);
   const [page, setPage] = useState(0);
   const [isCardEnd, setIsCardEnd] = useState(false);
-  useEffect(() => {
-    const getNewItems = async () => {
-      const items = await getItems(page);
-      if (items) {
-        if (items.data) {
-          setIsCardsLoading(false);
-          setIsLoading(false);
-          setProducts([...products, ...items.data]);
-        }
-      }
-    };
-    getNewItems();
-  }, []);
+  const [searchQuery, setSearchQuery] = useState('empty');
+  // useEffect(() => {
+  //   const getNewItems = async () => {
+  //     const items = await getItems(page);
+  //     if (items) {
+  //       if (items.data) {
+  //         setIsCardsLoading(false);
+  //         setIsLoading(false);
+  //         setProducts([...products, ...items.data]);
+  //       }
+  //     }
+  //   };
+  //   getNewItems();
+  // }, []);
 
-  const getItems = async (page: number) => {
-    return await ProductsServes.getAll(12, page);
+  const getItems = async (page: number, filter = '') => {
+    return await ProductsServes.getCards(12, page, filter);
   };
 
   const getMoreCards = async () => {
     setIsLoading(true);
     setIsCardsLoading(true);
-    const items = await getItems(page + 12);
+    const items = await getItems(page + 12, searchQuery);
     setPage(page + 12);
     setProducts([...products, ...items.data]);
     if (items.data.length < 12 || items.data.length === 0) {
@@ -45,15 +46,30 @@ function MainPage() {
   };
 
   const getFilterCards = async (value: string) => {
+    if (searchQuery === value) {
+      return;
+    }
+    await setProducts([]);
+    await setSearchQuery(value);
+    await setPage(0);
+    setIsCardEnd(true);
     setIsLoading(true);
+    const items = await getItems(0, value);
+    console.log(value, items.data);
+    setProducts([...items.data]);
+    setIsLoading(false);
+    if (!(items.data.length < 12)) {
+      setIsCardEnd(false);
+    }
   };
 
   return (
     <div>
       <div className="mainPage">
-        <SearchField />
+        <SearchField downloadFiltredCards={getFilterCards} />
         <CardsContainer products={products} isCardsLoading={isLoading} />
         {isLoading && <Loader />}
+        {!isLoading && products.length === 0 && <p>Products not found</p>}
         {!isCardEnd && !isCardsLoading && (
           <Button text={'Download more'} onClck={getMoreCards}></Button>
         )}

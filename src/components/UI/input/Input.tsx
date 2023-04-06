@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState, KeyboardEvent } from 'react';
 import classes from './Input.module.css';
 
 interface IProps {
@@ -8,6 +8,7 @@ interface IProps {
   labelForInput?: string;
   type?: string;
   inputRef?: React.Ref<HTMLInputElement> | null | undefined;
+  getFiltredCards?: (value: string) => void;
 }
 
 const Input = (props: IProps) => {
@@ -19,11 +20,18 @@ const Input = (props: IProps) => {
     if (props.isNeedSave) {
       const value = localStorage.getItem(`${props.name}Input`);
       window.addEventListener('beforeunload', handleWindowBeforeUnload);
-      if (value) {
-        setInputValue(value);
-      } else {
-        setInputValue('');
-      }
+      const restoreValue = async () => {
+        if (value) {
+          await setInputValue(value);
+        } else {
+          await setInputValue('');
+        }
+        if (props.getFiltredCards) {
+          const value = searchValue.current ? searchValue.current : '';
+          props.getFiltredCards(value);
+        }
+      };
+      restoreValue();
     }
     return () => {
       if (props.isNeedSave) {
@@ -41,8 +49,14 @@ const Input = (props: IProps) => {
     }
   };
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = (event: KeyboardEvent<HTMLInputElement>) => {
     setInputValue(event.currentTarget.value);
+  };
+
+  const handleEnter = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && props.getFiltredCards) {
+      props.getFiltredCards(searchValue.current);
+    }
   };
 
   return (
@@ -54,6 +68,7 @@ const Input = (props: IProps) => {
         value={inputValue}
         onInput={handleChange}
         placeholder={props.placeholder}
+        onKeyPress={handleEnter}
         name={props.name}
         id={props.name}
         type={type}
