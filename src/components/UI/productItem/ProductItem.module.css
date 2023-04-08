@@ -20,8 +20,11 @@
 
 .item__image {
   max-width: 100%;
-  object-fit: contain;
+  max-height: 200px;
+  object-fit: cover;
   border-radius: 10px;
+  display: block;
+  margin: 0 auto;
 }
 
 .item__title {
