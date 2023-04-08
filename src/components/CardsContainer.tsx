@@ -1,9 +1,9 @@
 import React from 'react';
 import ProductItem from './UI/productItem/ProductItem';
-import { IApiResponse } from '../types/APIResponse';
+import { Item } from '../types/APIResponse';
 
 interface IProps {
-  products: IApiResponse[];
+  products: Item[];
   isCardsLoading: boolean;
 }
 

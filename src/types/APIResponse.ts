@@ -1,6 +1,6 @@
 export interface Item {
   price: number;
-  images: Array<URL>;
+  images: Array<string>;
   title: string;
   sold: number;
   category: string;

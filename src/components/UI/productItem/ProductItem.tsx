@@ -1,37 +1,39 @@
-import React, { Component } from 'react';
-import { IApiResponse } from '../../../types/APIResponse';
+import React, { useState } from 'react';
+import { Item } from '../../../types/APIResponse';
 import classes from './ProductItem.module.css';
 import { Link } from 'react-router-dom';
-
-interface IState {
-  test?: string;
-}
+import Loader from '../loading/Loader';
 
 interface IProps {
-  product: IApiResponse;
+  product: Item;
   page?: number;
 }
 
-class ProductItem extends Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <Link to={'/product/' + this.props.product.id} className={classes.item}>
-        <img
-          className={classes.item__image}
-          src={this.props.product.images?.[0]}
-          alt="Product image"
-        />
-        <h2 className={classes.item__title}>{this.props.product.title}</h2>
-        <p className={classes.item__description}>{this.props.product.description}</p>
-        <p>{this.props.product.price}$</p>
-      </Link>
-    );
-  }
-}
+const ProductItem = (props: IProps) => {
+  const [isImageLoad, setIsImageLoad] = useState(false);
+  const loadImageHandler = () => {
+    setIsImageLoad(true);
+  };
+  const hideImage = isImageLoad ? '' : classes.item__hideImage;
+  const hideLoader = isImageLoad ? classes.item__hideImage : '';
+  return (
+    <Link to={'/product/' + props.product.id} className={classes.item}>
+      {!isImageLoad && (
+        <div className={`${classes.item__loaderContainer} ${hideLoader}`}>
+          <Loader />
+        </div>
+      )}
+      <img
+        className={`${classes.item__image} ${hideImage}`}
+        src={props.product.images?.[0]}
+        alt="Product image"
+        onLoad={loadImageHandler}
+      />
+      <h2 className={classes.item__title}>{props.product.title}</h2>
+      <p className={classes.item__description}>{props.product.description}</p>
+      <p>{props.product.price}$</p>
+    </Link>
+  );
+};
 
 export default ProductItem;

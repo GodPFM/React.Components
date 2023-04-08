@@ -11,7 +11,7 @@
 .loader {
   width: 50px;
   object-fit: cover;
-  animation: logo-spin 1s infinite;
+  animation: logo-spin 1s linear infinite;
 }
 
 @keyframes logo-spin {

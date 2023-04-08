@@ -15,9 +15,7 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "parse/dist/parse.min.js": [
-        "../node_modules/@types/parse/index.d.ts"
-      ]
+      "parse/dist/parse.min.js": ["../node_modules/@types/parse/index.d.ts"]
     },
     "resolveJsonModule": true
   },
