@@ -1,22 +1,28 @@
-import axios from 'axios';
+import Parse from 'parse/dist/parse.min.js';
+import { Item } from '../types/APIResponse';
 
 export default class ProductsServes {
   static async getCards(limit = 12, offset = 0, filter = '') {
-    console.log(limit, offset, filter);
-    const response = await axios.get('https://api.escuelajs.co/api/v1/products/', {
-      params: {
-        offset: offset,
-        limit: limit,
-        title: filter,
-      },
-    });
-    return response;
+    const query: Parse.Query = new Parse.Query('Products');
+    query.limit(limit);
+    query.skip(offset);
+    if (filter) {
+      query.contains('title', filter);
+    }
+    try {
+      const results: Parse.Object[] = await query.find();
+      return results.map(({ id, attributes }) => ({ id, ...attributes } as Item));
+    } catch (error) {
+      throw Error('Error while fetching Products: ' + error);
+    }
   }
 
   static async getById(id: string) {
+    const query: Parse.Query = new Parse.Query('Products');
+    query.equalTo('objectId', id);
     try {
-      const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);
-      return response;
+      const results: Parse.Object[] = await query.find();
+      return results[0].attributes;
     } catch {
       return false;
     }

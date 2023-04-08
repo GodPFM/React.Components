@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/MainPage.css';
-import { IApiResponse } from '../types/APIResponse';
+import { Item } from '../types/APIResponse';
 import ProductsServes from '../API/ProductsServes';
 import Button from '../components/UI/button/Button';
 import Loader from '../components/UI/loading/Loader';
@@ -10,7 +10,7 @@ import CardsContainer from '../components/CardsContainer';
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isCardsLoading, setIsCardsLoading] = useState(true);
-  const [products, setProducts] = useState([] as IApiResponse[]);
+  const [products, setProducts] = useState([] as Item[]);
   const [page, setPage] = useState(0);
   const [isCardEnd, setIsCardEnd] = useState(false);
   const [searchQuery, setSearchQuery] = useState('empty');
@@ -24,8 +24,8 @@ function MainPage() {
     setIsCardsLoading(true);
     const items = await getItems(page + 12, searchQuery);
     setPage(page + 12);
-    setProducts([...products, ...items.data]);
-    if (items.data.length < 12 || items.data.length === 0) {
+    setProducts([...products, ...items]);
+    if (items.length < 12 || items.length === 0) {
       setIsCardEnd(true);
     }
     setIsLoading(false);
@@ -42,10 +42,10 @@ function MainPage() {
     setIsCardEnd(true);
     setIsLoading(true);
     const items = await getItems(0, value);
-    console.log(value, items.data);
-    setProducts([...items.data]);
+    console.log(value, items);
+    setProducts([...items]);
     setIsLoading(false);
-    if (!(items.data.length < 11)) {
+    if (!(items.length < 11)) {
       setIsCardEnd(false);
       setIsCardsLoading(false);
     }

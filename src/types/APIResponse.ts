@@ -1,10 +1,15 @@
-export interface IApiResponse {
-  id: number;
-  title: string;
+export interface Item {
   price: number;
+  images: Array<URL>;
+  title: string;
+  sold: number;
+  category: string;
+  brand: string;
+  article: number;
   description: string;
-  category: Category;
-  images?: string[] | null;
+  stock: number;
+  id: string;
+  updatedAt: string;
 }
 export interface Category {
   id: number;
