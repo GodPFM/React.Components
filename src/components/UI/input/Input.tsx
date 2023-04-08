@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState, KeyboardEvent } from 'react';
+import React, { useLayoutEffect, useRef, useState, KeyboardEvent, useEffect } from 'react';
 import classes from './Input.module.css';
 
 interface IProps {
@@ -8,7 +8,7 @@ interface IProps {
   labelForInput?: string;
   type?: string;
   inputRef?: React.Ref<HTMLInputElement> | null | undefined;
-  getFiltredCards?: (value: string) => void;
+  getFilteredCards?: (value: string) => void;
 }
 
 const Input = (props: IProps) => {
@@ -26,9 +26,9 @@ const Input = (props: IProps) => {
         } else {
           await setInputValue('');
         }
-        if (props.getFiltredCards) {
+        if (props.getFilteredCards) {
           const value = searchValue.current ? searchValue.current : '';
-          props.getFiltredCards(value);
+          props.getFilteredCards(value);
         }
       };
       restoreValue();
@@ -54,8 +54,8 @@ const Input = (props: IProps) => {
   };
 
   const handleEnter = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && props.getFiltredCards) {
-      props.getFiltredCards(searchValue.current);
+    if (event.key === 'Enter' && props.getFilteredCards) {
+      props.getFilteredCards(searchValue.current);
     }
   };
 

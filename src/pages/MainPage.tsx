@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/MainPage.css';
 import { IApiResponse } from '../types/APIResponse';
 import ProductsServes from '../API/ProductsServes';
@@ -14,19 +14,6 @@ function MainPage() {
   const [page, setPage] = useState(0);
   const [isCardEnd, setIsCardEnd] = useState(false);
   const [searchQuery, setSearchQuery] = useState('empty');
-  // useEffect(() => {
-  //   const getNewItems = async () => {
-  //     const items = await getItems(page);
-  //     if (items) {
-  //       if (items.data) {
-  //         setIsCardsLoading(false);
-  //         setIsLoading(false);
-  //         setProducts([...products, ...items.data]);
-  //       }
-  //     }
-  //   };
-  //   getNewItems();
-  // }, []);
 
   const getItems = async (page: number, filter = '') => {
     return await ProductsServes.getCards(12, page, filter);
@@ -58,15 +45,16 @@ function MainPage() {
     console.log(value, items.data);
     setProducts([...items.data]);
     setIsLoading(false);
-    if (!(items.data.length < 12)) {
+    if (!(items.data.length < 11)) {
       setIsCardEnd(false);
+      setIsCardsLoading(false);
     }
   };
 
   return (
     <div>
       <div className="mainPage">
-        <SearchField downloadFiltredCards={getFilterCards} />
+        <SearchField downloadFilteredCards={getFilterCards} />
         <CardsContainer products={products} isCardsLoading={isLoading} />
         {isLoading && <Loader />}
         {!isLoading && products.length === 0 && <p>Products not found</p>}

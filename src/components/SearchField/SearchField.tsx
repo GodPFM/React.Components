@@ -4,7 +4,7 @@ import Button from '../UI/button/Button';
 import Input from '../UI/input/Input';
 
 interface IProps {
-  downloadFiltredCards: (value: string) => void;
+  downloadFilteredCards: (value: string) => void;
 }
 
 const SearchField = (props: IProps) => {
@@ -17,7 +17,7 @@ const SearchField = (props: IProps) => {
         name={'search'}
         placeholder={'Search'}
         isNeedSave={true}
-        getFiltredCards={props.downloadFiltredCards}
+        getFilteredCards={props.downloadFilteredCards}
       />
     </div>
   );
