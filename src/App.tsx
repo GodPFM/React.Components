@@ -8,7 +8,6 @@ import Header from './components/Header/Header';
 import AddCardForm from './pages/AddCardForm';
 import Parse from 'parse/dist/parse.min.js';
 
-// Your Parse initialization configuration goes here
 const PARSE_APPLICATION_ID = 'bTBI54NNgMYOcu9Wek7gtUaNxzcRZTdOMsCKnSDa';
 const PARSE_HOST_URL = 'https://parseapi.back4app.com/';
 const PARSE_JAVASCRIPT_KEY = 'JuP0m3MeXtiTZALU5meiuTob4wbVOBOCe2F6raSa';
