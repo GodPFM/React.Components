@@ -6,6 +6,7 @@ import { resolve } from 'path';
 const vitestConfig: VitestUserConfigInterface = {
   test: {
     environment: 'jsdom',
+    setupFiles: ['./src/tests/setupTests.ts'],
   },
 };
 
