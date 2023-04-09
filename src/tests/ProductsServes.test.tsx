@@ -1,7 +1,5 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import ProductsServes from '../API/ProductsServes';
-import { Item } from '../types/APIResponse';
-import { Attributes } from 'react';
 
 describe('Products serves', () => {
   test('returns false on -1', async () => {

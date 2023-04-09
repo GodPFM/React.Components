@@ -59,7 +59,6 @@ function MainPage(props: IProps) {
     setIsCardEnd(true);
     setIsLoading(true);
     const items = await getItems(0, value);
-    console.log(value, items);
     setProducts([...items]);
     setIsLoading(false);
     if (!(items.length < 11)) {
