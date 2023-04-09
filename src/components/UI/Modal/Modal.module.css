@@ -1,0 +1,44 @@
+*:hover {
+  color: unset;
+}
+
+*:active {
+  color: unset;
+}
+
+.modal {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__container {
+  margin: 20px auto;
+  width: 400px;
+  max-height: 80%;
+  overflow: auto;
+  border-radius: 25px;
+  background: white;
+  padding: 10px;
+  cursor: auto;
+}
+
+.modal__container::-webkit-scrollbar,
+.modal__container::-webkit-scrollbar-thumb {
+  width: 26px;
+  border-radius: 13px;
+  background-clip: padding-box;
+  border: 10px solid transparent;
+}
+
+.modal__container::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 10px;
+}
