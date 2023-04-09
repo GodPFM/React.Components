@@ -39,4 +39,31 @@ describe('Validation tests', () => {
     const result1 = ValidationInputs.validateRadioInput(true, false, false);
     expect(result1).toBe(false);
   });
+  test('Validate image input', () => {
+    const result = ValidationInputs.validateImageInput(null);
+    expect(result).toBe('Upload image');
+    const file = [
+      {
+        size: 3200000,
+      },
+    ] as unknown as FileList;
+    const result1 = ValidationInputs.validateImageInput(file);
+    expect(result1).toBe('Size > 3MB');
+    const file1 = [
+      {
+        name: 'test.gif',
+        size: 100,
+      },
+    ] as unknown as FileList;
+    const result2 = ValidationInputs.validateImageInput(file1);
+    expect(result2).toBe(false);
+    const file2 = [
+      {
+        name: 'test.exe',
+        size: 100,
+      },
+    ] as unknown as FileList;
+    const result3 = ValidationInputs.validateImageInput(file2);
+    expect(result3).toBe('Wrong type of file');
+  });
 });
