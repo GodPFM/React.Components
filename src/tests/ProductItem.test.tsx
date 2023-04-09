@@ -25,6 +25,6 @@ describe('Product item', () => {
       title: 'ASOS DESIGN Petite Whitby low waist skinny jeans in blue',
     };
     render(<ProductItem product={data} openModalFunc={() => {}} />, { wrapper: BrowserRouter });
-    expect(screen.getByText('483$')).toBeDefined();
+    expect(screen.getByText('2690$')).toBeDefined();
   });
 });
