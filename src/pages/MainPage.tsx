@@ -8,7 +8,7 @@ import SearchField from '../components/SearchField/SearchField';
 import CardsContainer from '../components/CardsContainer';
 import Modal from '../components/UI/Modal/Modal';
 import CardWithProduct from '../components/CardWithProduct/CardWithProduct';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   isModalOpen: boolean;

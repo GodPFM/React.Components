@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState, KeyboardEvent, useEffect } from 'react';
+import React, { KeyboardEvent, useLayoutEffect, useRef, useState } from 'react';
 import classes from './Input.module.css';
 
 interface IProps {

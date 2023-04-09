@@ -5,7 +5,6 @@ import About from './pages/About';
 import MainPage from './pages/MainPage';
 import Page404 from './pages/Page404';
 import Header from './components/Header/Header';
-import ProductPage from './pages/ProductPage';
 import AddCardForm from './pages/AddCardForm';
 import Parse from 'parse/dist/parse.min.js';
 
