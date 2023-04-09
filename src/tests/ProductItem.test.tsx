@@ -7,27 +7,24 @@ import { BrowserRouter } from 'react-router-dom';
 describe('Product item', () => {
   test('Must render product', async () => {
     const data = {
-      id: 23,
-      title: 'Elegant Steel Chair',
-      price: 483,
-      description:
-        'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
+      article: 1297914,
+      brand: 'ASOS Petite',
+      category: 'Jeans',
+      updatedAt: '01-01-2023',
+      description: 'Dropped waist Hip-hugging Hidden fly Pockets Slim fit Thigh-to-ankle tight fit',
+      id: 'QASkGFmJGf',
       images: [
-        'https://api.lorem.space/image/watch?w=640&h=480&r=5821',
-        'https://api.lorem.space/image/watch?w=640&h=480&r=1621',
-        'https://api.lorem.space/image/watch?w=640&h=480&r=2183',
+        'https://images.asos-media.com/products/sinie-dzhin…ign-petite-whitby/10038139-1-veneziablue?wid=3000',
+        'https://images.asos-media.com/products/sinie-dzhin…iej-asos-design-petite-whitby/10038139-2?wid=3000',
+        'https://images.asos-media.com/products/sinie-dzhin…iej-asos-design-petite-whitby/10038139-3?wid=3000',
+        'https://images.asos-media.com/products/sinie-dzhin…iej-asos-design-petite-whitby/10038139-4?wid=3000',
       ],
-      creationAt: '2023-03-19T02:45:57.000Z',
-      updatedAt: '2023-03-19T02:45:57.000Z',
-      category: {
-        id: 2,
-        name: 'Electronics',
-        image: 'https://api.lorem.space/image/watch?w=640&h=480&r=2465',
-        creationAt: '2023-03-19T02:45:57.000Z',
-        updatedAt: '2023-03-19T02:45:57.000Z',
-      },
+      price: 2690,
+      sold: 121,
+      stock: 720,
+      title: 'ASOS DESIGN Petite Whitby low waist skinny jeans in blue',
     };
-    render(<ProductItem product={data} />, { wrapper: BrowserRouter });
+    render(<ProductItem product={data} openModalFunc={() => {}} />, { wrapper: BrowserRouter });
     expect(screen.getByText('483$')).toBeDefined();
   });
 });
