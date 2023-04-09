@@ -14,7 +14,9 @@ const Modal = (props: IProps) => {
   useLayoutEffect(() => {
     targetElement = targetRef.current;
     if (targetElement) {
-      disableBodyScroll(targetElement);
+      disableBodyScroll(targetElement, {
+        reserveScrollBarGap: true,
+      });
     }
     return () => {
       if (targetElement) {
