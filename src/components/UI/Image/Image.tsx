@@ -16,7 +16,7 @@ const Image = (props: IProps) => {
   return (
     <div className={classes.image__container}>
       {!isImageLoad && (
-        <div className={`${classes.image__loaderContainer} ${hideLoader}`}>
+        <div className={`${classes.image__loaderContainer} ${hideLoader}`} data-testid="loader">
           <Loader />
         </div>
       )}
@@ -25,6 +25,7 @@ const Image = (props: IProps) => {
         src={props.src}
         alt="Product image"
         onLoad={loadImageHandler}
+        data-testid="image"
       />
     </div>
   );
