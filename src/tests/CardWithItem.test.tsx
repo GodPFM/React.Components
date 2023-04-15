@@ -26,6 +26,6 @@ describe('Card with product', () => {
     await waitFor(() => {
       expect(screen.getByRole('img')).toBeDefined();
     });
-    expect(screen.getByText('ASOS Petite')).toBeDefined();
+    expect(screen.getByText('Modern Plastic Sausages')).toBeDefined();
   });
 });

@@ -6,13 +6,6 @@ import MainPage from './pages/MainPage';
 import Page404 from './pages/Page404';
 import Header from './components/Header/Header';
 import AddCardForm from './pages/AddCardForm';
-import Parse from 'parse/dist/parse.min.js';
-
-const PARSE_APPLICATION_ID = 'bTBI54NNgMYOcu9Wek7gtUaNxzcRZTdOMsCKnSDa';
-const PARSE_HOST_URL = 'https://parseapi.back4app.com/';
-const PARSE_JAVASCRIPT_KEY = 'JuP0m3MeXtiTZALU5meiuTob4wbVOBOCe2F6raSa';
-Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
-Parse.serverURL = PARSE_HOST_URL;
 
 function App() {
   return (

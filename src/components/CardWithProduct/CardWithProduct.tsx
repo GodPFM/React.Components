@@ -18,7 +18,7 @@ const CardWithProduct = (props: IProps) => {
       if (productId) {
         const itemData = await ProductsServes.getById(productId);
         if (itemData) {
-          await setItemData(itemData as Item);
+          await setItemData(itemData.data as Item);
         } else {
           setError(true);
         }
@@ -41,19 +41,13 @@ const CardWithProduct = (props: IProps) => {
           <h2 className={classes.title}>{itemData.title}</h2>
           <p>{itemData.description}</p>
           <p>
-            <b>Article:</b> {itemData.article}
+            <b>Category:</b> {itemData.category.name}
           </p>
           <p>
-            <b>Category:</b> {itemData.category}
-          </p>
-          <p>
-            <b>Brand:</b> {itemData.brand}
+            <b>Id:</b> {itemData.id}
           </p>
           <p>
             <b>Price:</b> {itemData.price}$
-          </p>
-          <p>
-            <b>In stock:</b> {itemData.stock}
           </p>
         </div>
       )}

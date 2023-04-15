@@ -32,8 +32,8 @@ function MainPage(props: IProps) {
     setIsCardsLoading(true);
     const items = await getItems(page + 12, searchQuery);
     setPage(page + 12);
-    setProducts([...products, ...items]);
-    if (items.length < 12 || items.length === 0) {
+    setProducts([...products, ...items.data]);
+    if (items.data.length < 12 || items.data.length === 0) {
       setIsCardEnd(true);
     }
     setIsLoading(false);
@@ -59,9 +59,9 @@ function MainPage(props: IProps) {
     setIsCardEnd(true);
     setIsLoading(true);
     const items = await getItems(0, value);
-    setProducts([...items]);
+    setProducts([...items.data]);
     setIsLoading(false);
-    if (!(items.length < 11)) {
+    if (!(items.data.length < 11)) {
       setIsCardEnd(false);
       setIsCardsLoading(false);
     }

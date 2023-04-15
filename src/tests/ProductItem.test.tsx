@@ -7,24 +7,27 @@ import { BrowserRouter } from 'react-router-dom';
 describe('Product item', () => {
   test('Must render product', async () => {
     const data = {
-      article: 1297914,
-      brand: 'ASOS Petite',
-      category: 'Jeans',
-      updatedAt: '01-01-2023',
-      description: 'Dropped waist Hip-hugging Hidden fly Pockets Slim fit Thigh-to-ankle tight fit',
-      id: 'QASkGFmJGf',
+      id: 15,
+      title: 'Modern Plastic Sausages',
+      price: 719,
+      description:
+        'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality',
       images: [
-        'https://images.asos-media.com/products/sinie-dzhin…ign-petite-whitby/10038139-1-veneziablue?wid=3000',
-        'https://images.asos-media.com/products/sinie-dzhin…iej-asos-design-petite-whitby/10038139-2?wid=3000',
-        'https://images.asos-media.com/products/sinie-dzhin…iej-asos-design-petite-whitby/10038139-3?wid=3000',
-        'https://images.asos-media.com/products/sinie-dzhin…iej-asos-design-petite-whitby/10038139-4?wid=3000',
+        'https://picsum.photos/640/640?r=1682',
+        'https://picsum.photos/640/640?r=6407',
+        'https://picsum.photos/640/640?r=3409',
       ],
-      price: 2690,
-      sold: 121,
-      stock: 720,
-      title: 'ASOS DESIGN Petite Whitby low waist skinny jeans in blue',
+      creationAt: '2023-04-14T08:53:29.000Z',
+      updatedAt: '2023-04-14T08:53:29.000Z',
+      category: {
+        id: 4,
+        name: 'Shoes',
+        image: 'https://picsum.photos/640/640?r=8803',
+        creationAt: '2023-04-14T08:53:29.000Z',
+        updatedAt: '2023-04-14T08:53:29.000Z',
+      },
     };
     render(<ProductItem product={data} openModalFunc={() => {}} />, { wrapper: BrowserRouter });
-    expect(screen.getByText('2690$')).toBeDefined();
+    expect(screen.getByText('719$')).toBeDefined();
   });
 });

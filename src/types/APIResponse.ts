@@ -1,18 +1,17 @@
 export interface Item {
-  price: number;
-  images: Array<string>;
+  id: number;
   title: string;
-  sold: number;
-  category: string;
-  brand: string;
-  article: number;
+  price: number;
   description: string;
-  stock: number;
-  id: string;
+  creationAt: string;
   updatedAt: string;
+  category: Category;
+  images?: string[] | null;
 }
 export interface Category {
   id: number;
   name: string;
   image: string;
+  creationAt?: string;
+  updatedAt?: string;
 }

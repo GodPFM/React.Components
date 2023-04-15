@@ -15,8 +15,6 @@ describe('Products serves', () => {
   });
   test('returns array of products', async () => {
     const response = await ProductsServes.getCards();
-    expect(response.length).toBe(1);
-    const anotherData = await ProductsServes.getCards(1);
-    expect(anotherData.length).toBe(1);
+    expect(response.data[0].id).toBe(15);
   });
 });
