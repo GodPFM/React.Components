@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import '../styles/MainPage.css';
-import ProductsServes, { cardsAPI } from '../API/ProductsServes';
+import { cardsAPI } from '../API/ProductsServes';
 import Button from '../components/UI/button/Button';
 import Loader from '../components/UI/loading/Loader';
 import SearchField from '../components/SearchField/SearchField';
@@ -17,7 +17,6 @@ interface IProps {
 
 function MainPage(props: IProps) {
   const [modalOpen, setModalOpen] = useState(props.isModalOpen);
-  const [searchQuery, setSearchQuery] = useState('empty');
   const navigate = useNavigate();
 
   const { value } = useAppSelector((state) => state.searchReducer);

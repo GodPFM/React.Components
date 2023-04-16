@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Item } from '../../types/APIResponse';
+import React, { useEffect } from 'react';
 import Loader from '../UI/loading/Loader';
-import ProductsServes from '../../API/ProductsServes';
+import { cardsAPI } from '../../API/ProductsServes';
 import Image from '../UI/Image/Image';
 import classes from './CardWithProduct.module.css';
 
@@ -9,49 +8,43 @@ interface IProps {
   closeModal: () => void;
 }
 const CardWithProduct = (props: IProps) => {
-  const [itemData, setItemData] = useState({} as Item);
-  const [loadingData, setLoadingData] = useState(true);
-  const [error, setError] = useState(false);
+  const [trigger, { data, isError, isLoading }] = cardsAPI.useLazyFetchSingleCardQuery();
+
   useEffect(() => {
     const getItem = async () => {
       const productId = location.pathname.split('/').at(-1);
       if (productId) {
-        const itemData = await ProductsServes.getById(productId);
-        if (itemData) {
-          await setItemData(itemData.data as Item);
-        } else {
-          setError(true);
-        }
-        setLoadingData(false);
+        trigger(Number(productId));
       }
     };
     getItem();
   }, []);
+
   return (
     <>
-      {loadingData && <Loader />}
-      {!loadingData && !error && (
+      {isLoading && <Loader />}
+      {data && !isError && (
         <div className={classes.product__container}>
           <div className={classes.closeButtonContainer}>
             <button className={classes.closeButton} onClick={props.closeModal}></button>
           </div>
           <div className={classes.image}>
-            <Image src={itemData.images?.[0] + '&fit=constrain'} />
+            <Image src={data.images?.[0] + '&fit=constrain'} />
           </div>
-          <h2 className={classes.title}>{itemData.title}</h2>
-          <p>{itemData.description}</p>
+          <h2 className={classes.title}>{data.title}</h2>
+          <p>{data.description}</p>
           <p>
-            <b>Category:</b> {itemData.category.name}
+            <b>Category:</b> {data.category.name}
           </p>
           <p>
-            <b>Id:</b> {itemData.id}
+            <b>Id:</b> {data.id}
           </p>
           <p>
-            <b>Price:</b> {itemData.price}$
+            <b>Price:</b> {data.price}$
           </p>
         </div>
       )}
-      {error && <p>Product not found</p>}
+      {isError && <p>Product not found</p>}
     </>
   );
 };

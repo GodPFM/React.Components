@@ -1,28 +1,5 @@
-import axios from 'axios';
 import { Item } from '../types/APIResponse';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-export default class ProductsServes {
-  static async getCards(limit = 8, offset = 0, filter = '') {
-    const response = await axios.get<Item[]>('https://api.escuelajs.co/api/v1/products/', {
-      params: {
-        offset: offset,
-        limit: limit,
-        title: filter,
-      },
-    });
-    return response;
-  }
-
-  static async getById(id: string) {
-    try {
-      const response = await axios.get<Item>(`https://api.escuelajs.co/api/v1/products/${id}`);
-      return response;
-    } catch {
-      return false;
-    }
-  }
-}
 
 export const cardsAPI = createApi({
   reducerPath: 'cardsAPI',
@@ -36,6 +13,11 @@ export const cardsAPI = createApi({
           limit: limit,
           title: filter,
         },
+      }),
+    }),
+    fetchSingleCard: build.query<Item, number>({
+      query: (id: number) => ({
+        url: `/products/${id}`,
       }),
     }),
   }),
