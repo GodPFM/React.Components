@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/AddCardForm.css';
 import CardsWithUsers from '../components/CardsWithUsers/CardsWithUsers';
 import Form from '../components/Form/Form';
 import { CardWithUsers } from '../types/CardWithUsers';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { formSlice } from '../store/formSlice';
 
 const AddCardForm = () => {
-  const [cards, setCards] = useState<CardWithUsers[]>([]);
+  const { cards } = useAppSelector((state) => state.formCardsReducer);
+  const { addCard } = formSlice.actions;
+  const dispatch = useAppDispatch();
 
   const setCard = (objectData: CardWithUsers) => {
-    setCards([...cards, objectData]);
+    dispatch(addCard(objectData));
   };
 
   return (
