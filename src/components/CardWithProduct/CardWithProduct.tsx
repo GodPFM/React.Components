@@ -8,16 +8,13 @@ interface IProps {
   closeModal: () => void;
 }
 const CardWithProduct = (props: IProps) => {
-  const [trigger, { data, isError, isLoading }] = cardsAPI.useLazyFetchSingleCardQuery();
+  const [trigger, { data, error, isError, isLoading }] = cardsAPI.useLazyFetchSingleCardQuery();
 
   useEffect(() => {
-    const getItem = async () => {
-      const productId = location.pathname.split('/').at(-1);
-      if (productId) {
-        trigger(Number(productId));
-      }
-    };
-    getItem();
+    const productId = location.pathname.split('/').at(-1);
+    if (productId) {
+      trigger(Number(productId));
+    }
   }, []);
 
   return (

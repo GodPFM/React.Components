@@ -2,10 +2,11 @@ import React from 'react';
 import { describe, expect, test } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import Input from '../components/UI/input/Input';
+import { renderWithProviders } from './setupTests';
 
 describe('Search input', () => {
   test('Should display entered values', async () => {
-    render(<Input isNeedSave={true} placeholder={'Search'} />);
+    renderWithProviders(<Input isNeedSave={true} placeholder={'Search'} />);
     const element = screen.getByDisplayValue('');
     fireEvent.input(element, {
       target: {

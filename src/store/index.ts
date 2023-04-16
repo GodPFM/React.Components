@@ -3,6 +3,7 @@ import searchReducer from './searchSlice';
 import { cardsAPI } from '../API/ProductsServes';
 import cardsReducer from './cardsSlice';
 import formCardsReducer from './formSlice';
+import type { PreloadedState } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
   searchReducer,
@@ -11,13 +12,14 @@ const rootReducer = combineReducers({
   [cardsAPI.reducerPath]: cardsAPI.reducer,
 });
 
-export const store = () => {
+export const store = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
       }).concat(cardsAPI.middleware),
+    preloadedState,
   });
 };
 

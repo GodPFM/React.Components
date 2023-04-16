@@ -25,8 +25,9 @@ const DateAndSelectInputs = (props: IProps) => {
           name={'birthdate'}
           register={props.dateRef}
           validate={{
-            required: 'Value is empty',
+            required: 'Date is empty',
             validate: (date) => {
+              console.log(date);
               const validate = ValidationInputs.validateInputDate(date);
               return validate ? validate : true;
             },

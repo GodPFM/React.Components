@@ -1,7 +1,8 @@
 import React from 'react';
 import { describe, expect, test } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import CardWithProduct from '../components/CardWithProduct/CardWithProduct';
+import { renderWithProviders } from './setupTests';
 
 describe('Card with product', () => {
   test('Render with wrong id', async () => {
@@ -10,7 +11,7 @@ describe('Card with product', () => {
         return { pathname: '/products/-1' };
       },
     });
-    render(<CardWithProduct closeModal={() => {}} />);
+    renderWithProviders(<CardWithProduct closeModal={() => {}} />);
     await waitFor(() => {
       expect(screen.getByRole('img')).toBeDefined();
     });
@@ -22,7 +23,7 @@ describe('Card with product', () => {
         return { pathname: '/products/37' };
       },
     });
-    render(<CardWithProduct closeModal={() => {}} />);
+    renderWithProviders(<CardWithProduct closeModal={() => {}} />);
     await waitFor(() => {
       expect(screen.getByRole('img')).toBeDefined();
     });

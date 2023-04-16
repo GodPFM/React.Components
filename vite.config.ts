@@ -6,11 +6,10 @@ import { resolve } from 'path';
 const vitestConfig: VitestUserConfigInterface = {
   test: {
     environment: 'jsdom',
-    setupFiles: ['./src/tests/setupTests.ts'],
+    setupFiles: ['./src/tests/setupTests.tsx'],
   },
 };
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   test: vitestConfig.test,
