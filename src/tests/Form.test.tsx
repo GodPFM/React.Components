@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, expect, test } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AddCardForm from '../pages/AddCardForm';
 import { renderWithProviders } from './setupTests';

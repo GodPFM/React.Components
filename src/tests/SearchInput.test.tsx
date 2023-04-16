@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, expect, test } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import Input from '../components/UI/input/Input';
 import { renderWithProviders } from './setupTests';
 

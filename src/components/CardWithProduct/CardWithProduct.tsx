@@ -8,7 +8,7 @@ interface IProps {
   closeModal: () => void;
 }
 const CardWithProduct = (props: IProps) => {
-  const [trigger, { data, error, isError, isLoading }] = cardsAPI.useLazyFetchSingleCardQuery();
+  const [trigger, { data, isError, isLoading }] = cardsAPI.useLazyFetchSingleCardQuery();
 
   useEffect(() => {
     const productId = location.pathname.split('/').at(-1);
