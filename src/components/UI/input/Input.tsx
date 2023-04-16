@@ -1,7 +1,9 @@
-import React, { KeyboardEvent, useLayoutEffect } from 'react';
+import React, { KeyboardEvent, useEffect } from 'react';
 import classes from './Input.module.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { searchSlice } from '../../../store/searchSlice';
+import { cardsSlice } from '../../../store/cardsSlice';
+import { cardsAPI } from '../../../API/ProductsServes';
 
 interface IProps {
   isNeedSave: boolean;
@@ -14,17 +16,19 @@ interface IProps {
 }
 
 const Input = (props: IProps) => {
+  const { previousSearchQuery } = useAppSelector((state) => state.cardsReducer);
   const { value } = useAppSelector((state) => state.searchReducer);
   const { changeValue } = searchSlice.actions;
+  const { setDownloadState, addCards } = cardsSlice.actions;
   const dispatch = useAppDispatch();
 
-  useLayoutEffect(() => {
-    if (props.isNeedSave) {
-      if (props.getFilteredCards) {
-        props.getFilteredCards(value);
-      }
+  const [trigger, { data }] = cardsAPI.useLazyFetchAllCardsQuery();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addCards([value, data]));
     }
-  }, []);
+  }, [data]);
 
   const type = props.type ? props.type : 'text';
 
@@ -32,9 +36,17 @@ const Input = (props: IProps) => {
     dispatch(changeValue(event.currentTarget.value));
   };
 
-  const handleEnter = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && props.getFilteredCards) {
-      props.getFilteredCards(value);
+  const handleEnter = async (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (value === previousSearchQuery) {
+        return;
+      }
+      dispatch(setDownloadState());
+      trigger({
+        limit: 12,
+        offset: 0,
+        filter: value,
+      });
     }
   };
 
