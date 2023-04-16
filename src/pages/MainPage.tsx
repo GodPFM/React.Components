@@ -61,7 +61,7 @@ function MainPage(props: IProps) {
     const items = await getItems(0, value);
     setProducts([...items.data]);
     setIsLoading(false);
-    if (!(items.data.length < 11)) {
+    if (!(items.data.length <= 11)) {
       setIsCardEnd(false);
       setIsCardsLoading(false);
     }
