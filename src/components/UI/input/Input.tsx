@@ -12,7 +12,6 @@ interface IProps {
   labelForInput?: string;
   type?: string;
   inputRef?: React.Ref<HTMLInputElement> | null | undefined;
-  getFilteredCards?: (value: string) => void;
 }
 
 const Input = (props: IProps) => {
@@ -43,7 +42,7 @@ const Input = (props: IProps) => {
       }
       dispatch(setDownloadState());
       trigger({
-        limit: 12,
+        limit: 8,
         offset: 0,
         filter: value,
       });

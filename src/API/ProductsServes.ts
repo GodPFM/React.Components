@@ -3,7 +3,7 @@ import { Item } from '../types/APIResponse';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export default class ProductsServes {
-  static async getCards(limit = 12, offset = 0, filter = '') {
+  static async getCards(limit = 8, offset = 0, filter = '') {
     const response = await axios.get<Item[]>('https://api.escuelajs.co/api/v1/products/', {
       params: {
         offset: offset,
@@ -29,7 +29,7 @@ export const cardsAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.escuelajs.co/api/v1' }),
   endpoints: (build) => ({
     fetchAllCards: build.query<Item[], { limit: number; offset: number; filter: string }>({
-      query: ({ limit = 12, offset = 0, filter = '' }) => ({
+      query: ({ limit = 8, offset = 0, filter = '' }) => ({
         url: '/products',
         params: {
           offset: offset,

@@ -39,13 +39,19 @@ export const cardsSlice = createSlice({
       state.cards.push(...action.payload[1]);
       state.isCardsLoading = false;
       state.isLoading = false;
-      state.isCardEnd = action.payload[1].length <= 11;
+      state.isCardEnd = action.payload[1].length <= 7;
     },
     setDownloadState(state) {
       state.cards = [];
+      state.page = 0;
       state.isCardEnd = true;
       state.isCardsLoading = true;
       state.isLoading = true;
+    },
+    getMoreCards(state) {
+      state.isLoading = true;
+      state.isCardsLoading = true;
+      state.page += 8;
     },
   },
 });
