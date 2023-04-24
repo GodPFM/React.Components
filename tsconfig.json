@@ -23,6 +23,6 @@
   "references": [{ "path": "./tsconfig.node.json" }],
   "ts-node": {
     "esm": true,
-    "experimentalSpecifierResolution": "node",
+    "experimentalSpecifierResolution": "node"
   }
 }

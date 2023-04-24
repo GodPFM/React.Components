@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/MainPage.css';
 import { cardsAPI } from '../API/ProductsServes';
 import Button from '../components/UI/button/Button';
