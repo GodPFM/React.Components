@@ -5,6 +5,7 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const isProd = process.env.NODE_ENV === 'production';
 
 async function createServer() {
   const app = express();
@@ -17,19 +18,29 @@ async function createServer() {
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
+    let template: string, render;
 
     try {
-      let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf8');
+      if (!isProd) {
+        template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf8');
+      } else {
+        template = fs.readFileSync(path.resolve(__dirname, 'dist/client/index.html'), 'utf8');
+      }
       template = await vite.transformIndexHtml(url, template);
       const parts = template.split('<!--ssr-outlet-->');
-      res.write(parts[0]);
-      const render = (await vite.ssrLoadModule('./src/entry-server.tsx')).renderApp;
+      if (!isProd) {
+        render = (await vite.ssrLoadModule('./src/entry-server.tsx')).renderApp;
+      } else {
+        // @ts-ignore
+        render = (await import('./dist/server/entry-server')).renderApp;
+      }
       const stream = render(url, {
         onShellReady() {
+          res.write(parts[0]);
           stream.pipe(res);
         },
         onAllReady() {
-          res.write(parts[1]);
+          res.write(parts[0] + parts[1]);
           res.end();
         },
       });
