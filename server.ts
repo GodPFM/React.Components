@@ -3,9 +3,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
+import 'vite/client';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = import.meta.env.MODE === 'production';
 
 async function createServer() {
   const app = express();
