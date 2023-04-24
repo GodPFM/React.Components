@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import classes from './Modal.module.css';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
@@ -11,7 +11,7 @@ const Modal = (props: IProps) => {
   const targetRef = useRef<HTMLDivElement>(null);
   let targetElement: Element | null = null;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     targetElement = targetRef.current;
     if (targetElement) {
       disableBodyScroll(targetElement, {

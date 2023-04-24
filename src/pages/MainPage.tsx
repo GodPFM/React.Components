@@ -28,7 +28,7 @@ function MainPage(props: IProps) {
 
   const [trigger, { data }] = cardsAPI.useLazyFetchAllCardsQuery();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(setDownloadState());
     trigger({
       limit: 8,
