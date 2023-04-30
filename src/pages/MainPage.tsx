@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/MainPage.css';
-import { cardsAPI } from '../API/ProductsServes';
+import { fetchAllCards } from '../API/ProductsServes';
 import Button from '../components/UI/button/Button';
 import Loader from '../components/UI/loading/Loader';
 import SearchField from '../components/SearchField/SearchField';
@@ -23,33 +23,17 @@ function MainPage(props: IProps) {
   const { cards, isLoading, isCardsLoading, isCardEnd, page } = useAppSelector(
     (state) => state.cardsReducer
   );
-  const { setDownloadState, addCards, getMoreCards } = cardsSlice.actions;
+  // const { getMoreCards } = cardsSlice.actions;
   const dispatch = useAppDispatch();
 
-  const [trigger, { data }] = cardsAPI.useLazyFetchAllCardsQuery();
-
-  useEffect(() => {
-    dispatch(setDownloadState());
-    trigger({
-      limit: 8,
-      offset: 0,
-      filter: value,
-    });
-  }, []);
-
-  useEffect(() => {
-    if (data) {
-      dispatch(addCards([value, data]));
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch(addCards([value, data]));
+  //   }
+  // }, [data]);
 
   const getMoreCardsFnc = async () => {
-    await dispatch(getMoreCards());
-    trigger({
-      limit: 8,
-      offset: page + 8,
-      filter: value,
-    });
+    dispatch(fetchAllCards({ limit: 8, offset: page, filter: value }));
   };
 
   const closeModal = () => {

@@ -1,9 +1,7 @@
-import React, { KeyboardEvent, useEffect } from 'react';
+import React, { KeyboardEvent } from 'react';
 import classes from './Input.module.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { searchSlice } from '../../../store/searchSlice';
-import { cardsSlice } from '../../../store/cardsSlice';
-import { cardsAPI } from '../../../API/ProductsServes';
 
 interface IProps {
   isNeedSave: boolean;
@@ -18,16 +16,13 @@ const Input = (props: IProps) => {
   const { previousSearchQuery } = useAppSelector((state) => state.cardsReducer);
   const { value } = useAppSelector((state) => state.searchReducer);
   const { changeValue } = searchSlice.actions;
-  const { setDownloadState, addCards } = cardsSlice.actions;
   const dispatch = useAppDispatch();
 
-  const [trigger, { data }] = cardsAPI.useLazyFetchAllCardsQuery();
-
-  useEffect(() => {
-    if (data) {
-      dispatch(addCards([value, data]));
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch(addCards([value, data]));
+  //   }
+  // }, [data]);
 
   const type = props.type ? props.type : 'text';
 
@@ -40,12 +35,12 @@ const Input = (props: IProps) => {
       if (value === previousSearchQuery) {
         return;
       }
-      dispatch(setDownloadState());
-      trigger({
-        limit: 8,
-        offset: 0,
-        filter: value,
-      });
+      // dispatch(setDownloadState());
+      // trigger({
+      //   limit: 8,
+      //   offset: 0,
+      //   filter: value,
+      // });
     }
   };
 
