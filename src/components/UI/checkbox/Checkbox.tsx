@@ -12,7 +12,7 @@ interface IProps {
 
 const Checkbox = (props: IProps) => {
   return (
-    <div className={classes.checkbox__container}>
+    <div className={classes.checkbox__container} data-testid="checkboxInput">
       <input
         type="checkbox"
         id={props.value}

@@ -7,7 +7,7 @@ interface IProps {
 
 const ErrorMessage = (props: IProps) => {
   return (
-    <div className={classes.error__container}>
+    <div className={classes.error__container} data-testid="errorMessage">
       <p className={classes.error__message}>{props.text}</p>
     </div>
   );

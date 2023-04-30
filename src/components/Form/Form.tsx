@@ -61,7 +61,7 @@ const Form = (props: IProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(openModalFunc)}>
+    <form onSubmit={handleSubmit(openModalFunc)} data-testid="addItemForm">
       <NameAndSurnameInputs
         nameRef={register}
         surnameRef={register}

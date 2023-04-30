@@ -11,7 +11,12 @@ interface IProps {
 
 const ProductItem = (props: IProps) => {
   return (
-    <div className={classes.item} onClick={props.openModalFunc} data-id={props.product.id}>
+    <div
+      className={classes.item}
+      onClick={props.openModalFunc}
+      data-id={props.product.id}
+      data-testid="card"
+    >
       <div className={classes.item__imageContainer}>
         <Image src={props.product.images?.[0] + '&fit=constrain'} />
       </div>

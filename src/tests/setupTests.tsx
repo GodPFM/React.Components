@@ -19,8 +19,6 @@ global.Request = Request;
 // @ts-ignore
 global.Response = Response;
 
-const store = appStore();
-
 beforeAll(() => server.listen());
 afterEach(() => {
   server.resetHandlers();

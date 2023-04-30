@@ -15,7 +15,6 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/" element={<MainPage isModalOpen={false} />}></Route>
         <Route path="/page404" element={<Page404 />}></Route>
-        <Route path="/product/:id" element={<MainPage isModalOpen={true} />} />
         <Route path="/add-item" element={<AddCardForm />} />
         <Route path="*" element={<Page404 />}></Route>
       </Routes>

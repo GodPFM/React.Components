@@ -26,7 +26,11 @@ const CardWithProduct = (props: IProps) => {
       {data && !isError && (
         <div className={classes.product__container}>
           <div className={classes.closeButtonContainer}>
-            <button className={classes.closeButton} onClick={props.closeModal}></button>
+            <button
+              className={classes.closeButton}
+              onClick={props.closeModal}
+              data-testid="modalCloseBtn"
+            ></button>
           </div>
           <div className={classes.image}>
             <Image src={data.images?.[0] + '&fit=constrain'} />

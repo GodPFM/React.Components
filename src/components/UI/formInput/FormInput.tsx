@@ -14,7 +14,7 @@ interface IProps {
 
 const FormInput = (props: IProps) => {
   return (
-    <div className={classes.formInput__container}>
+    <div className={classes.formInput__container} data-testid="inputName">
       {props.labelForInput && <label htmlFor={props.name}>{props.labelForInput}</label>}
       <input
         className={classes.formInput}

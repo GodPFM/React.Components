@@ -28,7 +28,12 @@ const Modal = (props: IProps) => {
     e.stopPropagation();
   };
   return (
-    <div ref={targetRef} className={classes.modal} onClick={props.closeModal}>
+    <div
+      ref={targetRef}
+      className={classes.modal}
+      onClick={props.closeModal}
+      data-testid="modalWindow"
+    >
       <div className={classes.modal__container} onClick={handleClick}>
         {props.children}
       </div>
