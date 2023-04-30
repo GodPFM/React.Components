@@ -27,7 +27,6 @@ export const cardsSlice = createSlice({
       if (state.previousSearchQuery === action.payload) {
         return;
       }
-      console.log(action.payload);
       state.cards = [];
       state.previousSearchQuery = action.payload;
       state.page = 0;

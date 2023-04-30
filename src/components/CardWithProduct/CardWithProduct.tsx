@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import Loader from '../UI/loading/Loader';
-import { cardsAPI } from '../../API/ProductsServes';
-import Image from '../UI/Image/Image';
+import Loader from '../UI/loading/Loader.js';
+import { cardsAPI } from '../../API/ProductsServes.js';
+import Image from '../UI/Image/Image.js';
 import classes from './CardWithProduct.module.css';
 
 interface IProps {
@@ -18,7 +18,7 @@ const CardWithProduct = (props: IProps) => {
   }, []);
 
   return (
-    <>
+    <div>
       {isLoading && <Loader />}
       {data && !isError && (
         <div className={classes.product__container}>
@@ -42,7 +42,7 @@ const CardWithProduct = (props: IProps) => {
         </div>
       )}
       {isError && <p>Product not found</p>}
-    </>
+    </div>
   );
 };
 
