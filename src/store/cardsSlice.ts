@@ -44,7 +44,11 @@ export const cardsSlice = createSlice({
     builder
       .addCase(fetchAllCards.fulfilled, (state, action) => {
         state.previousSearchQuery = action.payload[0];
-        state.cards.push(...action.payload[1]);
+        if (action.payload[2]) {
+          state.cards = action.payload[1];
+        } else {
+          state.cards.push(...action.payload[1]);
+        }
         state.isCardsLoading = false;
         state.isLoading = false;
         state.isCardEnd = action.payload[1].length <= 7;

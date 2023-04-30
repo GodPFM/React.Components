@@ -28,10 +28,10 @@ const { createAsyncThunk, createSlice } = ((toolkitRaw as never).default ??
 // });
 
 export const fetchAllCards = createAsyncThunk<
-  [string, Item[]],
-  { limit: number; offset: number; filter: string },
+  [string, Item[], boolean | undefined],
+  { limit: number; offset: number; filter: string; isNewValue?: boolean },
   { rejectValue: string }
->('main/fetchAllCards', async ({ limit, offset, filter }, { rejectWithValue }) => {
+>('main/fetchAllCards', async ({ limit, offset, filter, isNewValue }, { rejectWithValue }) => {
   try {
     const response = await fetch(
       `https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}&title=${filter}`
@@ -42,7 +42,7 @@ export const fetchAllCards = createAsyncThunk<
 
     const data = await response.json();
 
-    return [filter, data];
+    return [filter, data, isNewValue];
   } catch (error) {
     return rejectWithValue(error instanceof Error ? error.message : 'Error');
   }

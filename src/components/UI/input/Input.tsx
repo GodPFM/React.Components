@@ -2,6 +2,7 @@ import React, { KeyboardEvent } from 'react';
 import classes from './Input.module.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { searchSlice } from '../../../store/searchSlice';
+import { fetchAllCards } from '../../../API/ProductsServes';
 
 interface IProps {
   isNeedSave: boolean;
@@ -35,12 +36,7 @@ const Input = (props: IProps) => {
       if (value === previousSearchQuery) {
         return;
       }
-      // dispatch(setDownloadState());
-      // trigger({
-      //   limit: 8,
-      //   offset: 0,
-      //   filter: value,
-      // });
+      dispatch(fetchAllCards({ offset: 0, limit: 8, filter: value, isNewValue: true }));
     }
   };
 
