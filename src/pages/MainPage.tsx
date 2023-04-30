@@ -7,7 +7,6 @@ import SearchField from '../components/SearchField/SearchField';
 import CardsContainer from '../components/CardsContainer';
 import Modal from '../components/UI/Modal/Modal';
 import CardWithProduct from '../components/CardWithProduct/CardWithProduct';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 
 interface IProps {
@@ -16,7 +15,6 @@ interface IProps {
 
 function MainPage(props: IProps) {
   const [modalOpen, setModalOpen] = useState(props.isModalOpen);
-  const navigate = useNavigate();
   const [cardId, setCardId] = useState(0);
 
   const { value } = useAppSelector((state) => state.searchReducer);

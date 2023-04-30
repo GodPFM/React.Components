@@ -1,7 +1,6 @@
-import React, { MouseEvent, MouseEventHandler } from 'react';
+import React, { MouseEvent } from 'react';
 import { Item } from '../../../types/APIResponse';
 import classes from './ProductItem.module.css';
-import { Link } from 'react-router-dom';
 import Image from '../Image/Image';
 
 interface IProps {

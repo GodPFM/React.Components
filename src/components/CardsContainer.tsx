@@ -1,4 +1,4 @@
-import React, { MouseEvent, MouseEventHandler } from 'react';
+import React, { MouseEvent } from 'react';
 import ProductItem from './UI/productItem/ProductItem';
 import { Item } from '../types/APIResponse';
 
