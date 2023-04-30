@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import '../styles/MainPage.css';
 import { fetchAllCards } from '../API/ProductsServes';
 import Button from '../components/UI/button/Button';
@@ -17,6 +17,7 @@ interface IProps {
 function MainPage(props: IProps) {
   const [modalOpen, setModalOpen] = useState(props.isModalOpen);
   const navigate = useNavigate();
+  const [cardId, setCardId] = useState(0);
 
   const { value } = useAppSelector((state) => state.searchReducer);
   const { cards, isLoading, isCardsLoading, isCardEnd, page } = useAppSelector(
@@ -30,11 +31,15 @@ function MainPage(props: IProps) {
 
   const closeModal = () => {
     setModalOpen(false);
-    navigate('/');
+    setCardId(0);
   };
 
-  const openModal = () => {
-    setModalOpen(true);
+  const openModal = (event: MouseEvent<HTMLDivElement>) => {
+    const id = event.currentTarget.dataset.id;
+    if (id) {
+      setCardId(Number(id));
+      setModalOpen(true);
+    }
   };
 
   return (
@@ -50,7 +55,7 @@ function MainPage(props: IProps) {
       </div>
       {modalOpen && (
         <Modal closeModal={closeModal}>
-          <CardWithProduct closeModal={closeModal} />
+          <CardWithProduct closeModal={closeModal} cardId={cardId} />
         </Modal>
       )}
     </div>

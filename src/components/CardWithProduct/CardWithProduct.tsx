@@ -7,13 +7,15 @@ import classes from './CardWithProduct.module.css';
 
 interface IProps {
   closeModal: () => void;
+  cardId: number;
 }
 const CardWithProduct = (props: IProps) => {
   const { data, isLoading, isError } = useAppSelector((state) => state.singleCardReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const productId = location.pathname.split('/').at(-1);
+    const productId = props.cardId;
+    console.log(productId);
     if (Number(productId)) {
       dispatch(fetchSingleCard(Number(productId)));
     }

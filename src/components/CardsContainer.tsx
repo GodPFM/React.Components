@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { MouseEvent, MouseEventHandler } from 'react';
 import ProductItem from './UI/productItem/ProductItem';
 import { Item } from '../types/APIResponse';
 
 interface IProps {
   products: Item[];
   isCardsLoading: boolean;
-  openModal: () => void;
+  openModal: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
 const CardsContainer = (props: IProps) => {
