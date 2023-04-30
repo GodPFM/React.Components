@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+// @ts-ignore
+const { createSlice } = ((toolkitRaw as never).default ?? toolkitRaw) as typeof toolkitRaw;
 import { Item } from '../types/APIResponse';
 import { fetchSingleCard } from '../API/ProductsServes';
 

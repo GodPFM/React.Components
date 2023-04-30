@@ -1,4 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+// @ts-ignore
+const { createSlice } = ((toolkitRaw as never).default ?? toolkitRaw) as typeof toolkitRaw;
 import { CardWithUsers } from '../types/CardWithUsers';
 
 type initialState = {

@@ -1,5 +1,7 @@
 import { Item } from '../types/APIResponse';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+// @ts-ignore
+const { createAsyncThunk } = ((toolkitRaw as never).default ?? toolkitRaw) as typeof toolkitRaw;
 
 export const fetchAllCards = createAsyncThunk<
   [string, Item[], boolean | undefined],

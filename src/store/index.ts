@@ -1,5 +1,8 @@
 import type { PreloadedState } from '@reduxjs/toolkit';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+// @ts-ignore
+const { combineReducers, configureStore } = ((toolkitRaw as never).default ??
+  toolkitRaw) as typeof toolkitRaw;
 import searchReducer from './searchSlice';
 import cardsReducer from './cardsSlice';
 import formCardsReducer from './formSlice';
