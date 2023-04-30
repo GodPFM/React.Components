@@ -3,12 +3,11 @@ import { Item } from '../types/APIResponse';
 import { server } from '../mocks/server';
 import { store as appStore } from '../store/index';
 import type { RenderOptions } from '@testing-library/react';
-import type { AppStore, RootState } from '../store';
 import { render } from '@testing-library/react';
+import type { AppStore, RootState } from '../store';
 import { Provider } from 'react-redux';
 import React, { PropsWithChildren } from 'react';
 import { PreloadedState } from '@reduxjs/toolkit';
-import { cardsAPI } from '../API/ProductsServes';
 import nodeFetch, { Request, Response } from 'node-fetch';
 
 // Fix error with node. Issue - https://github.com/reduxjs/redux-toolkit/issues/3254
@@ -25,7 +24,6 @@ const store = appStore();
 beforeAll(() => server.listen());
 afterEach(() => {
   server.resetHandlers();
-  store.dispatch(cardsAPI.util.resetApiState());
 });
 afterAll(() => server.close());
 

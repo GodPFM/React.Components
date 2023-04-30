@@ -15,7 +15,6 @@ const CardWithProduct = (props: IProps) => {
 
   useEffect(() => {
     const productId = props.cardId;
-    console.log(productId);
     if (Number(productId)) {
       dispatch(fetchSingleCard(Number(productId)));
     }
