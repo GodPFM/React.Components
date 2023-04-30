@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/MainPage.css';
 import { fetchAllCards } from '../API/ProductsServes';
 import Button from '../components/UI/button/Button';
@@ -9,7 +9,6 @@ import Modal from '../components/UI/Modal/Modal';
 import CardWithProduct from '../components/CardWithProduct/CardWithProduct';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { cardsSlice } from '../store/cardsSlice';
 
 interface IProps {
   isModalOpen: boolean;
@@ -23,14 +22,7 @@ function MainPage(props: IProps) {
   const { cards, isLoading, isCardsLoading, isCardEnd, page } = useAppSelector(
     (state) => state.cardsReducer
   );
-  // const { getMoreCards } = cardsSlice.actions;
   const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch(addCards([value, data]));
-  //   }
-  // }, [data]);
 
   const getMoreCardsFnc = async () => {
     dispatch(fetchAllCards({ limit: 8, offset: page, filter: value }));

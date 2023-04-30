@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { Item } from '../types/APIResponse';
 import { fetchAllCards } from '../API/ProductsServes';
 
@@ -23,29 +23,14 @@ const initialState: CardsState = {
 export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
-  reducers: {
-    // getFilteredCards(state, action: PayloadAction<string>) {
-    //   if (state.previousSearchQuery === action.payload) {
-    //     return;
-    //   }
-    //   state.cards = [];
-    //   state.previousSearchQuery = action.payload;
-    //   state.page = 0;
-    //   state.isCardEnd = true;
-    //   state.isLoading = true;
-    // },
-    // getMoreCards(state) {
-    //   state.isLoading = true;
-    //   state.isCardsLoading = true;
-    //   state.page += 8;
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllCards.fulfilled, (state, action) => {
         state.previousSearchQuery = action.payload[0];
         if (action.payload[2]) {
           state.cards = action.payload[1];
+          state.page = 0;
         } else {
           state.cards.push(...action.payload[1]);
         }

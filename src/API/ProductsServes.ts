@@ -1,10 +1,5 @@
-import * as toolkitRaw from '@reduxjs/toolkit';
 import { Item } from '../types/APIResponse';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
-const { createAsyncThunk, createSlice } = ((toolkitRaw as never).default ??
-  toolkitRaw) as typeof toolkitRaw;
-
+import { createAsyncThunk } from '@reduxjs/toolkit';
 // export const cardsAPI = createApi({
 //   reducerPath: 'cardsAPI',
 //   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.escuelajs.co/api/v1' }),
@@ -47,3 +42,19 @@ export const fetchAllCards = createAsyncThunk<
     return rejectWithValue(error instanceof Error ? error.message : 'Error');
   }
 });
+
+export const fetchSingleCard = createAsyncThunk<Item, number, { rejectValue: string }>(
+  'main/fetchSingleItem',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`);
+      if (!response.ok) {
+        return rejectWithValue(response.statusText);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error instanceof Error ? error.message : 'Error');
+    }
+  }
+);

@@ -19,12 +19,6 @@ const Input = (props: IProps) => {
   const { changeValue } = searchSlice.actions;
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch(addCards([value, data]));
-  //   }
-  // }, [data]);
-
   const type = props.type ? props.type : 'text';
 
   const handleChange = (event: KeyboardEvent<HTMLInputElement>) => {
